@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarLink - Application Review</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background-color: #F8F1F3;
+
+            color: #000000;
+        }
+
+
+        /* ==========================
+           NAVIGATION
+        ========================== */
+
+        .navbar {
+
+            background-color: #800020;
+
+            color: white;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+
+        .back-link {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        /* ==========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: 35px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* ==========================
+           PAGE HEADER
+        ========================== */
+
+        .page-header {
+
+            background-color: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.08);
+        }
+
+
+        .page-header h1 {
+
+            margin: 0 0 10px 0;
+
+            color: #000000;
+        }
+
+
+        .page-header p {
+
+            margin: 5px 0;
+
+            color: #000000;
+        }
+
+
+        /* ==========================
+           APPLICATION SECTIONS
+        ========================== */
+
+        .section {
+
+            background-color: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.08);
+        }
+
+
+        .section h2 {
+
+            margin-top: 0;
+
+            color: #000000;
+
+            border-bottom: 3px solid #800020;
+
+            padding-bottom: 10px;
+        }
+
+
+        /* ==========================
+           INFORMATION GRID
+        ========================== */
+
+        .information-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .information-item {
+
+            background-color: #FFF7F8;
+
+            padding: 15px;
+
+            border-radius: 7px;
+
+            border-left: 4px solid #800020;
+        }
+
+
+        .information-item strong {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #000000;
+        }
+
+
+        .information-item span {
+
+            color: #000000;
+        }
+
+
+        /* ==========================
+           DOCUMENTS
+        ========================== */
+
+        .document {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .document-name {
+
+            font-weight: bold;
+
+            color: #000000;
+        }
+
+
+        .document-button {
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            padding: 8px 15px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+
+
+        .document-button:hover {
+
+            background-color: #5A0018;
+        }
+
+
+        /* ==========================
+           MEMBERSHIP STATUS
+        ========================== */
+
+        .membership-status {
+
+            padding: 18px;
+
+            background-color: #FFF3F5;
+
+            border-left: 5px solid #800020;
+
+            border-radius: 5px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .membership-status strong {
+
+            color: #000000;
+        }
+
+
+        /* ==========================
+           REVIEW NOTES
+        ========================== */
+
+        textarea {
+
+            width: 100%;
+
+            min-height: 120px;
+
+            padding: 12px;
+
+            border: 1px solid #999999;
+
+            border-radius: 7px;
+
+            resize: vertical;
+
+            font-family: Arial, sans-serif;
+
+            color: #000000;
+        }
+
+
+        textarea:focus {
+
+            outline: none;
+
+            border-color: #800020;
+        }
+
+
+        /* ==========================
+           ACTION BUTTONS
+        ========================== */
+
+        .actions {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .approve-button {
+
+            flex: 1;
+
+            padding: 14px;
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .approve-button:hover {
+
+            background-color: #5A0018;
+        }
+
+
+        .reject-button {
+
+            flex: 1;
+
+            padding: 14px;
+
+            background-color: white;
+
+            color: #800020;
+
+            border: 2px solid #800020;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .reject-button:hover {
+
+            background-color: #FFF3F5;
+        }
+
+
+        .verify-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+
+        .verify-button:hover {
+
+            background-color: #5A0018;
+        }
+
+
+        /* ==========================
+           FOOTER
+        ========================== */
+
+        footer {
+
+            background-color: #5A0018;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 50px;
+        }
+
+
+        /* ==========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .information-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .actions {
+
+                flex-direction: column;
+            }
+
+
+            .document {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            🎓 ScholarLink
+
+        </div>
+
+
+        <a
+            href="church-admin.html"
+            class="back-link"
+        >
+
+            ← Back to Dashboard
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- ==========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+
+                Scholarship Application Review
+
+            </h1>
+
+
+            <p>
+
+                <strong>Applicant:</strong>
+                John Doe
+
+            </p>
+
+
+            <p>
+
+                <strong>Scholarship:</strong>
+                Church of Christ 30A.D. Scholarship
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ==========================
+             PERSONAL INFORMATION
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Personal Information
+
+            </h2>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <strong>Name</strong>
+
+                    <span>
+                        John Doe
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Email</strong>
+
+                    <span>
+                        john@example.com
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Phone Number</strong>
+
+                    <span>
+                        0712345678
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>ID / Passport Number</strong>
+
+                    <span>
+                        ***************
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================
+             ACADEMIC INFORMATION
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Academic Information
+
+            </h2>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <strong>Student Number</strong>
+
+                    <span>
+                        123456789
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Institution</strong>
+
+                    <span>
+                        Walter Sisulu University
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Study Level</strong>
+
+                    <span>
+                        Undergraduate
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Qualification Type</strong>
+
+                    <span>
+                        Bachelor's Degree
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Programme</strong>
+
+                    <span>
+                        BSc Computer Science
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Year of Study</strong>
+
+                    <span>
+                        2nd Year
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Academic Average</strong>
+
+                    <span>
+                        74%
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================
+             CHURCH MEMBERSHIP
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Church Membership
+
+            </h2>
+
+
+            <div class="membership-status">
+
+                <strong>
+
+                    Membership Status:
+
+                </strong>
+
+                Pending Verification
+
+            </div>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <strong>Church</strong>
+
+                    <span>
+
+                        Church of Christ 30A.D.
+
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Branch</strong>
+
+                    <span>
+
+                        Queenstown
+
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Pastor / Church Leader</strong>
+
+                    <span>
+
+                        To be verified
+
+                    </span>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <strong>Membership Duration</strong>
+
+                    <span>
+
+                        More than 3 years
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="verify-button"
+                onclick="verifyMembership()"
+            >
+
+                Verify Church Membership
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==========================
+             SUPPORTING DOCUMENTS
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Supporting Documents
+
+            </h2>
+
+
+            <div class="document">
+
+                <span class="document-name">
+
+                    📄 Academic Record / Transcript
+
+                </span>
+
+
+                <button
+                    class="document-button"
+                    onclick="viewDocument('Academic Record')"
+                >
+
+                    View
+
+                </button>
+
+            </div>
+
+
+            <div class="document">
+
+                <span class="document-name">
+
+                    📄 Proof of Registration
+
+                </span>
+
+
+                <button
+                    class="document-button"
+                    onclick="viewDocument('Proof of Registration')"
+                >
+
+                    View
+
+                </button>
+
+            </div>
+
+
+            <div class="document">
+
+                <span class="document-name">
+
+                    📄 Certified ID Copy
+
+                </span>
+
+
+                <button
+                    class="document-button"
+                    onclick="viewDocument('Certified ID Copy')"
+                >
+
+                    View
+
+                </button>
+
+            </div>
+
+
+            <div class="document">
+
+                <span class="document-name">
+
+                    📄 Proof of Residence
+
+                </span>
+
+
+                <button
+                    class="document-button"
+                    onclick="viewDocument('Proof of Residence')"
+                >
+
+                    View
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================
+             FINANCIAL INFORMATION
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Financial Information
+
+            </h2>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <strong>
+
+                        Other Bursary / Scholarship
+
+                    </strong>
+
+                    <span>
+
+                        No
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <br>
+
+
+            <div class="information-item">
+
+                <strong>
+
+                    Financial Need Explanation
+
+                </strong>
+
+
+                <p>
+
+                    The applicant has indicated that
+                    financial assistance is required
+                    to help cover university-related
+                    expenses.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================
+             REVIEW
+        ========================== -->
+
+        <div class="section">
+
+            <h2>
+
+                Church Review
+
+            </h2>
+
+
+            <label for="reviewNotes">
+
+                Review Notes
+
+            </label>
+
+
+            <br><br>
+
+
+            <textarea
+                id="reviewNotes"
+                placeholder="Enter your review notes here..."
+            ></textarea>
+
+
+            <div class="actions">
+
+
+                <button
+                    class="approve-button"
+                    onclick="approveApplication()"
+                >
+
+                    Approve Application
+
+                </button>
+
+
+                <button
+                    class="reject-button"
+                    onclick="rejectApplication()"
+                >
+
+                    Reject Application
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ==========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        © 2026 ScholarLink.
+        Church Scholarship Management System.
+
+    </footer>
+
+
+
+    <!-- ==========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        function verifyMembership() {
+
+            alert(
+                "Membership verification will be completed by the church administrator."
+            );
+
+        }
+
+
+        function viewDocument(documentName) {
+
+            alert(
+                "Opening " + documentName + "..."
+            );
+
+        }
+
+
+        function approveApplication() {
+
+            const notes =
+                document.getElementById(
+                    "reviewNotes"
+                ).value;
+
+
+            if (notes.trim() === "") {
+
+                alert(
+                    "Please enter review notes before approving the application."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Application approved successfully."
+            );
+
+        }
+
+
+        function rejectApplication() {
+
+            const notes =
+                document.getElementById(
+                    "reviewNotes"
+                ).value;
+
+
+            if (notes.trim() === "") {
+
+                alert(
+                    "Please enter review notes explaining the decision."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Application rejected."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

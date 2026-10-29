@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarLink | Donor Login</title>
+
+    <style>
+        :root {
+            --burgundy: #800020;
+            --dark-burgundy: #5c0018;
+            --grey: #666;
+            --border: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background:
+                linear-gradient(
+                    rgba(30, 5, 15, .65),
+                    rgba(30, 5, 15, .65)
+                ),
+                url("Scholarlink-background.png") center / cover no-repeat,
+                var(--dark-burgundy);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            padding: 38px;
+            border-radius: 14px;
+            border-top: 6px solid var(--burgundy);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+        }
+
+        .logo {
+            text-align: center;
+            color: var(--burgundy);
+            font-size: 29px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 23px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--grey);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            background: #fbeaea;
+            border: 1px solid #edc5cc;
+            color: #a00020;
+        }
+
+        .message.success {
+            display: block;
+            background: #eaf7ee;
+            border: 1px solid #bfe2ca;
+            color: #176b35;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--burgundy);
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, .08);
+        }
+
+        .password-wrap {
+            position: relative;
+        }
+
+        .password-wrap input {
+            padding-right: 68px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--burgundy);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: var(--burgundy);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: var(--dark-burgundy);
+        }
+
+        .login-button:disabled {
+            opacity: .65;
+            cursor: wait;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            line-height: 2;
+            color: var(--grey);
+        }
+
+        a {
+            color: var(--burgundy);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <div class="logo">🎓 ScholarLink</div>
+        <h1>Donor Sign In</h1>
+        <p class="subtitle">
+            Welcome back! Sign in to support students
+            and manage your donor account.
+        </p>
+
+        <div id="message" class="message"
+             role="alert" aria-live="polite"></div>
+
+        <form id="donorLoginForm">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="username"
+                    placeholder="Enter your donor email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrap">
+                    <input
+                        type="password"
+                        id="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button"
+                            class="show-password"
+                            id="showPassword">Show</button>
+                </div>
+            </div>
+
+            <button type="submit" id="loginButton"
+                    class="login-button">
+                Sign In as Donor
+            </button>
+        </form>
+
+        <div class="links">
+            Don't have a donor account?
+            <br>
+            <a href="donor-signup.html">Create a donor account</a>
+            <br>
+            Applicant?
+            <a href="login.html">Applicant sign in</a>
+            <br>
+            <a href="index.html">← Back to ScholarLink</a>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById("donorLoginForm");
+        const message = document.getElementById("message");
+        const button = document.getElementById("loginButton");
+        const passwordInput = document.getElementById("password");
+
+        document.getElementById("showPassword")
+            .addEventListener("click", function () {
+                const showing = passwordInput.type === "text";
+                passwordInput.type = showing ? "password" : "text";
+                this.textContent = showing ? "Show" : "Hide";
+            });
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            message.className = "message";
+            button.disabled = true;
+            button.textContent = "Signing in...";
+
+            try {
+                const response = await fetch(
+                    "http://localhost:3000/api/auth/donor-login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            email: document.getElementById("email")
+                                .value.trim().toLowerCase(),
+                            password: passwordInput.value
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message || "Unable to sign in."
+                    );
+                }
+
+                if (
+                    !result.user ||
+                    String(result.user.role).toLowerCase() !== "donor"
+                ) {
+                    throw new Error(
+                        "This account is not registered as a donor."
+                    );
+                }
+
+                sessionStorage.setItem("scholarLinkLoggedIn", "true");
+                sessionStorage.setItem(
+                    "scholarLinkCurrentUser",
+                    JSON.stringify(result.user)
+                );
+
+                message.className = "message success";
+                message.textContent = "Login successful! Redirecting...";
+                button.textContent = "Signed In";
+
+                setTimeout(function () {
+                    window.location.href = "donor-dashboard.html";
+                }, 800);
+
+            } catch (error) {
+                console.error("Donor login error:", error);
+
+                message.className = "message error";
+                message.textContent =
+                    error instanceof TypeError
+                        ? "Cannot connect to the server. Check that ScholarLink is running."
+                        : error.message;
+
+                button.disabled = false;
+                button.textContent = "Sign In as Donor";
+            }
+        });
+    </script>
+</body>
+</html>

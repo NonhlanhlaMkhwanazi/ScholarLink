@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarLink | Church Scholarship Hub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            color: #222222;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* COLOURS */
+
+        :root {
+            --burgundy: #800020;
+            --dark-burgundy: #5c0018;
+            --charcoal: #222222;
+            --grey: #666666;
+            --light-grey: #f6f6f7;
+            --border: #e5e5e5;
+            --white: #ffffff;
+        }
+
+        /*  NAVBAR */
+
+        .navbar {
+            width: 100%;
+            height: 76px;
+            background: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+
+            background: var(--burgundy);
+            color: white;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--burgundy);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: #777777;
+            display: block;
+            margin-top: -4px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            color: #333333;
+            font-weight: 500;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .nav-signin {
+            border: 1px solid var(--burgundy);
+            color: var(--burgundy) !important;
+
+            padding: 9px 20px;
+            border-radius: 7px;
+        }
+
+        .nav-signin:hover {
+            background: var(--burgundy);
+            color: white !important;
+        }
+
+        .nav-signup {
+            background: var(--burgundy);
+            color: white !important;
+
+            padding: 10px 20px;
+            border-radius: 7px;
+        }
+
+        .nav-signup:hover {
+            background: var(--dark-burgundy);
+        }
+
+        /*HERO */
+
+        .hero {
+            min-height: 610px;
+
+            background-image:
+                linear-gradient(
+                    rgba(30, 5, 15, 0.55),
+                    rgba(30, 5, 15, 0.55)
+                ),
+                url("Scholarlink-background.png");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            padding: 40px 25px;
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 30px;
+
+            font-size: 13px;
+            letter-spacing: 1px;
+
+            margin-bottom: 25px;
+
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.05;
+            font-weight: 700;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #f1d7df;
+        }
+
+        .hero p {
+            max-width: 690px;
+            margin: 0 auto 35px;
+
+            font-size: 19px;
+            line-height: 1.7;
+
+            color: #f5f5f5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .hero-primary {
+            background: var(--burgundy);
+            color: white;
+
+            padding: 14px 28px;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .hero-primary:hover {
+            background: #a0002b;
+            transform: translateY(-2px);
+        }
+
+        .hero-secondary {
+            background: white;
+            color: var(--burgundy);
+
+            padding: 14px 28px;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .hero-secondary:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+
+        /* INTRODUCTION */
+
+        .intro {
+            padding: 90px 7%;
+            background: white;
+            text-align: center;
+        }
+
+        .section-label {
+            color: var(--burgundy);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #222222;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: auto;
+
+            color: #666666;
+            font-size: 16px;
+        }
+
+        /*FEATURES*/
+
+        .features-section {
+            background: #f7f7f8;
+            padding: 75px 7%;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .features {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+
+            padding: 35px 28px;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            text-align: center;
+
+            transition: 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #f5e9ed;
+            color: var(--burgundy);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 27px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            color: #222222;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /*SCHOLARSHIPS*/
+
+        .scholarships-section {
+            padding: 90px 7%;
+            background: white;
+        }
+
+        .scholarships-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .scholarship-grid {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 30px;
+        }
+
+        .scholarship-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+        .scholarship-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        .scholarship-top {
+            height: 8px;
+            background: var(--burgundy);
+        }
+
+        .scholarship-content {
+            padding: 32px;
+        }
+
+        .church-icon {
+            width: 55px;
+            height: 55px;
+
+            background: #f5e9ed;
+            color: var(--burgundy);
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .scholarship-content h3 {
+            font-size: 23px;
+            color: #222222;
+
+            margin-bottom: 8px;
+        }
+
+        .location {
+            color: #777777;
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .scholarship-content p {
+            color: #666666;
+            font-size: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .study-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+
+            margin-bottom: 25px;
+        }
+
+        .study-tag {
+            background: #f5f5f5;
+            color: #444444;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+        }
+
+        .scholarship-button {
+            display: inline-block;
+
+            background: var(--burgundy);
+            color: white;
+
+            padding: 11px 20px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .scholarship-button:hover {
+            background: var(--dark-burgundy);
+        }
+
+
+        .how-section {
+            background: #f7f7f8;
+            padding: 85px 7%;
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 50px auto 0;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 35px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+
+            margin: 0 auto 18px;
+
+            background: var(--burgundy);
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .cta {
+            padding: 75px 7%;
+            background: white;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 1000px;
+            margin: auto;
+
+            padding: 55px 35px;
+
+            border-radius: 15px;
+
+            background: #f8f1f3;
+
+            border: 1px solid #ead6dc;
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #666666;
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .cta-button {
+            display: inline-block;
+
+            background: var(--burgundy);
+            color: white;
+
+            padding: 13px 28px;
+
+            border-radius: 7px;
+
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-burgundy);
+        }
+        footer {
+            background: #242124;
+            color: white;
+
+            padding: 50px 7% 25px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+
+            gap: 50px;
+
+            padding-bottom: 35px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 23px;
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .footer-logo span {
+            color: #d59aaa;
+        }
+
+        .footer-description {
+            color: #bbbbbb;
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        .footer-column h4 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: #bbbbbb;
+
+            font-size: 14px;
+
+            margin-bottom: 9px;
+
+            transition: 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #d59aaa;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 22px auto 0;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #999999;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .nav-signin,
+            .nav-signup {
+                padding: 7px 12px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .scholarship-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: auto;
+                min-height: 70px;
+
+                padding: 12px 5%;
+
+                flex-wrap: wrap;
+
+                gap: 12px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 20px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                padding-bottom: 5px;
+            }
+
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 29px;
+            }
+
+            .intro,
+            .scholarships-section,
+            .features-section,
+            .how-section,
+            .cta {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .scholarship-content {
+                padding: 25px;
+            }
+
+            .cta-box {
+                padding: 40px 22px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">
+                🎓
+            </div>
+
+            <div>
+                <div class="logo-text">
+                    ScholarLink
+                </div>
+
+                <span class="logo-subtitle">
+                    CHURCH SCHOLARSHIP HUB
+                </span>
+            </div>
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="scholarships.html">
+                Scholarships
+            </a>
+
+            <a href="login.html" class="nav-signin">
+                Sign In
+            </a>
+
+            <a href="signup.html" class="nav-signup">
+                Create Account
+            </a>
+
+        </div>
+
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                CHURCH SCHOLARSHIP HUB
+            </div>
+
+            <h1>
+                Welcome to
+                <span>ScholarLink</span>
+            </h1>
+
+            <p>
+                Connecting students with scholarship opportunities
+                through participating churches and supporting their
+                educational journey.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="scholarships.html" class="hero-primary">
+                    Explore Scholarships
+                </a>
+
+                <a href="signup.html" class="hero-secondary">
+                    Create an Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="intro">
+
+        <div class="section-label">
+            About ScholarLink
+        </div>
+
+        <h2 class="section-title">
+            Supporting Your Educational Journey
+        </h2>
+
+        <p class="section-description">
+            ScholarLink provides a simple place for students to discover
+            scholarship opportunities offered through participating
+            churches and submit their applications online.
+        </p>
+
+    </section>
+
+    <section class="features-section">
+
+        <div class="features-header">
+
+            <div class="section-label">
+                Why ScholarLink?
+            </div>
+
+            <h2 class="section-title">
+                A Simple Way to Get Started
+            </h2>
+
+            <p class="section-description">
+                Everything you need to explore available opportunities
+                and begin your scholarship application.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎓
+                </div>
+
+                <h3>
+                    Scholarship Opportunities
+                </h3>
+
+                <p>
+                    Explore scholarship opportunities available
+                    through participating churches.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Simple Application
+                </h3>
+
+                <p>
+                    Complete your application online and provide
+                    the required supporting documents.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🤝
+                </div>
+
+                <h3>
+                    Church Support
+                </h3>
+
+                <p>
+                    Connect your scholarship application with
+                    the participating church supporting you.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="scholarships-section">
+
+        <div class="scholarships-header">
+
+            <div class="section-label">
+                Available Opportunities
+            </div>
+
+            <h2 class="section-title">
+                Explore Our Scholarships
+            </h2>
+
+            <p class="section-description">
+                Select a participating church to learn more about
+                its scholarship opportunity.
+            </p>
+
+        </div>
+
+
+        <div class="scholarship-grid">
+
+
+            
+
+            <div class="scholarship-card">
+
+                <div class="scholarship-top"></div>
+
+                <div class="scholarship-content">
+
+                    <div class="church-icon">
+                        ⛪
+                    </div>
+
+                    <h3>
+                        Church of Christ 30A.D.
+                    </h3>
+
+                    <div class="location">
+                        📍 Queenstown
+                    </div>
+
+                    <p>
+                        Explore the scholarship opportunity available
+                        to eligible members of the Church of Christ
+                        30A.D.
+                    </p>
+
+                    <div class="study-tags">
+
+                        <span class="study-tag">
+                            Undergraduate
+                        </span>
+
+                        <span class="study-tag">
+                            Postgraduate
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="church30ad.html"
+                        class="scholarship-button"
+                    >
+                        View Scholarship
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="scholarship-card">
+
+                <div class="scholarship-top"></div>
+
+                <div class="scholarship-content">
+
+                    <div class="church-icon">
+                        ⛪
+                    </div>
+
+                    <h3>
+                        Destiny Church
+                    </h3>
+
+                    <div class="location">
+                        📍 East London
+                    </div>
+
+                    <p>
+                        Explore the scholarship opportunity available
+                        to eligible members of Destiny Church.
+                    </p>
+
+                    <div class="study-tags">
+
+                        <span class="study-tag">
+                            Undergraduate
+                        </span>
+
+                        <span class="study-tag">
+                            Postgraduate
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="destiny.html"
+                        class="scholarship-button"
+                    >
+                        View Scholarship
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <section class="how-section">
+
+        <div class="features-header">
+
+            <div class="section-label">
+                How It Works
+            </div>
+
+            <h2 class="section-title">
+                Start Your Application
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Create an Account
+                </h3>
+
+                <p>
+                    Register for a ScholarLink account
+                    to get started.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Explore Scholarships
+                </h3>
+
+                <p>
+                    Browse the scholarship opportunities
+                    available through participating churches.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Submit Your Application
+                </h3>
+
+                <p>
+                    Complete the application form and
+                    upload the required documents.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <section class="cta">
+
+        <div class="cta-box">
+
+            <h2>
+                Ready to Explore Your Opportunities?
+            </h2>
+
+            <p>
+                Create your ScholarLink account and explore the
+                scholarship opportunities available to you.
+            </p>
+
+            <a href="signup.html" class="cta-button">
+                Create Your Account
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <div class="footer-content">
+
+
+            <div>
+
+                <div class="footer-logo">
+                    Scholar<span>Link</span>
+                </div>
+
+                <p class="footer-description">
+                    A church scholarship hub designed to connect
+                    students with educational opportunities through
+                    participating churches.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="scholarships.html">
+                    Scholarships
+                </a>
+
+                <a href="login.html">
+                    Sign In
+                </a>
+
+                <a href="signup.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Scholarships
+                </h4>
+
+                <a href="church30ad.html">
+                    Church of Christ 30A.D.
+                </a>
+
+                <a href="destiny.html">
+                    Destiny Church
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 ScholarLink. All rights reserved.
+            </span>
+
+            <span>
+                Church Scholarship Hub
+            </span>
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>

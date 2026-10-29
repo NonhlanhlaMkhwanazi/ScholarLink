@@ -1,0 +1,1048 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarLink - Admin Dashboard</title>
+
+    <style>
+        :root {
+            --burgundy: #800020;
+            --burgundy-dark: #5c0017;
+            --burgundy-light: #fff1f4;
+            --background: #f7f7fa;
+            --white: #ffffff;
+            --text: #292631;
+            --muted: #777482;
+            --border: #eceaf0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button, select {
+            font: inherit;
+        }
+
+        /* TOP BAR */
+        .topbar {
+            height: 76px;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            color: var(--burgundy);
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .logo span {
+            color: #b34c6a;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-label {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: var(--burgundy-light);
+            color: var(--burgundy);
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* DASHBOARD LAYOUT */
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 76px);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 245px;
+            flex-shrink: 0;
+            padding: 28px 16px;
+            background: var(--burgundy);
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-heading {
+            margin: 0 12px 18px;
+            color: #e6c1cc;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 13px;
+            margin-bottom: 7px;
+            border-radius: 8px;
+            color: #f8eaf0;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.17);
+            color: white;
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding-top: 30px;
+        }
+
+        .logout-button {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 8px;
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .logout-button:hover {
+            background: rgba(255,255,255,0.13);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: 32px;
+        }
+
+        .welcome-banner {
+            position: relative;
+            overflow: hidden;
+            padding: 32px;
+            margin-bottom: 28px;
+            border-radius: 14px;
+            color: white;
+            background: linear-gradient(120deg, #800020, #a63a59);
+            box-shadow: 0 7px 20px rgba(128, 0, 32, 0.12);
+        }
+
+        .welcome-banner::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -55px;
+            top: -105px;
+            border: 35px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.15);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .welcome-banner h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 10px;
+            font-size: clamp(24px, 3vw, 32px);
+        }
+
+        .welcome-banner p {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 0;
+            color: #f8e7ed;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 0 0 18px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            color: var(--text);
+            font-size: 20px;
+        }
+
+        .section-heading p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* STATISTICS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            min-width: 0;
+            padding: 22px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(30, 20, 40, 0.025);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--burgundy-light);
+            font-size: 20px;
+        }
+
+        .stat-number {
+            margin: 0 0 6px;
+            color: var(--burgundy);
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .stat-description {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* APPLICATIONS PANEL */
+        .applications-panel {
+            padding: 25px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(30, 20, 40, 0.025);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .panel-header h2 {
+            margin: 0;
+            color: var(--text);
+            font-size: 20px;
+        }
+
+        .panel-header p {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .application-count {
+            flex-shrink: 0;
+            padding: 7px 11px;
+            border-radius: 20px;
+            background: var(--burgundy-light);
+            color: var(--burgundy);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* FILTER */
+        .filter-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            margin-bottom: 22px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: #fcfbfd;
+        }
+
+        .filter-box label {
+            color: var(--text);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .filter-box select {
+            min-width: 230px;
+            max-width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d9d4dd;
+            border-radius: 7px;
+            background: white;
+            color: var(--text);
+            outline-color: var(--burgundy);
+        }
+
+        /* APPLICATION CARDS */
+        .application-card {
+            margin-bottom: 18px;
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--burgundy);
+            border-radius: 10px;
+            background: white;
+            transition: box-shadow 0.2s;
+        }
+
+        .application-card:hover {
+            box-shadow: 0 5px 18px rgba(40, 20, 40, 0.06);
+        }
+
+        .application-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .applicant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .applicant-name {
+            margin: 0 0 7px;
+            color: var(--burgundy);
+            font-size: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        .applicant-subtitle {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            padding: 18px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-item {
+            min-width: 0;
+        }
+
+        .detail-label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .application-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .view-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 17px;
+            border-radius: 7px;
+            background: var(--burgundy);
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .view-button:hover {
+            background: var(--burgundy-dark);
+        }
+
+        /* STATUS */
+        .status-box {
+            margin-top: 18px;
+            padding: 17px;
+            border-radius: 9px;
+            border: 1px solid #f0dce2;
+            background: #fff8fa;
+        }
+
+        .status-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .status-heading label {
+            color: var(--text);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-box select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d9c6ce;
+            border-radius: 7px;
+            background: white;
+            color: var(--burgundy);
+            outline-color: var(--burgundy);
+        }
+
+        .current-status {
+            margin-top: 12px;
+            color: var(--burgundy);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .loading,
+        .no-applications {
+            padding: 45px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .loading {
+            color: var(--burgundy);
+        }
+
+        .error-message {
+            padding: 20px;
+            border: 1px solid #f1cbd4;
+            border-left: 4px solid var(--burgundy);
+            border-radius: 8px;
+            background: #fff4f6;
+            color: var(--burgundy);
+            font-size: 14px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            padding: 22px;
+            background: white;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* TABLET AND MOBILE */
+        @media (max-width: 1050px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                padding: 24px;
+            }
+
+            .stats {
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                height: auto;
+                min-height: 68px;
+                padding: 15px 18px;
+            }
+
+            .admin-label {
+                display: none;
+            }
+
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .sidebar-heading,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .nav-link {
+                flex: 1 1 auto;
+                justify-content: center;
+                margin: 0;
+                padding: 11px 9px;
+                font-size: 12px;
+            }
+
+            .nav-icon {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px 14px;
+            }
+
+            .welcome-banner {
+                padding: 25px 21px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .applications-panel {
+                padding: 17px;
+            }
+
+            .panel-header {
+                align-items: flex-start;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 13px;
+            }
+
+            .application-card {
+                padding: 17px;
+            }
+
+            .filter-box {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .filter-box select {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .logo {
+                font-size: 21px;
+            }
+
+            .welcome-banner h1 {
+                font-size: 23px;
+            }
+
+            .panel-header {
+                flex-direction: column;
+            }
+
+            .applicant-header {
+                flex-direction: column;
+            }
+
+            .view-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <a href="admin-dashboard.html" class="logo">
+            Scholar<span>Link</span>
+        </a>
+
+        <div class="topbar-right">
+            <span class="admin-label">Administration Portal</span>
+            <div class="admin-avatar" aria-label="Administrator">A</div>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <p class="sidebar-heading">Administration</p>
+
+            <nav aria-label="Admin navigation">
+                <a href="admin-dashboard.html" class="nav-link active">
+                    <span class="nav-icon">▦</span>
+                    Dashboard
+                </a>
+
+                <a href="scholarships.html" class="nav-link">
+                    <span class="nav-icon">▤</span>
+                    Scholarships
+                </a>
+
+                <a href="#applicationsSection" class="nav-link">
+                    <span class="nav-icon">☷</span>
+                    Applications
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="logout-button" type="button" onclick="logoutAdmin()">
+                    ↪ &nbsp; Log out
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="welcome-banner">
+                <span class="welcome-tag">Admin workspace</span>
+                <h1>Scholarship Administration</h1>
+                <p>
+                    Welcome to your administration dashboard. Review scholarship
+                    applications, filter submissions by church, and manage
+                    application statuses from one place.
+                </p>
+            </section>
+
+            <section aria-labelledby="overviewHeading">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="overviewHeading">Applications Overview</h2>
+                        <p>A summary of scholarship submissions.</p>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Total Applications</span>
+                            <span class="stat-icon" aria-hidden="true">📋</span>
+                        </div>
+                        <p class="stat-number" id="totalApplications">0</p>
+                        <span class="stat-description">All submitted applications</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Church of Christ 30 A.D.</span>
+                            <span class="stat-icon" aria-hidden="true">⛪</span>
+                        </div>
+                        <p class="stat-number" id="church30adApplications">0</p>
+                        <span class="stat-description">Applications from this church</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Destiny Church</span>
+                            <span class="stat-icon" aria-hidden="true">🏛️</span>
+                        </div>
+                        <p class="stat-number" id="destinyApplications">0</p>
+                        <span class="stat-description">Applications from this church</span>
+                    </article>
+                </div>
+            </section>
+
+            <section class="applications-panel" id="applicationsSection">
+                <div class="panel-header">
+                    <div>
+                        <h2>Submitted Applications</h2>
+                        <p>Review applicant details and update application status.</p>
+                    </div>
+                    <span class="application-count" id="filteredCount">0 applications</span>
+                </div>
+
+                <div class="filter-box">
+                    <label for="churchFilter">Filter by church</label>
+                    <select id="churchFilter" onchange="displayApplications()">
+                        <option value="all">All Churches</option>
+                        <option value="Church of Christ 30 A.D.">Church of Christ 30 A.D.</option>
+                        <option value="Destiny Church">Destiny Church</option>
+                    </select>
+                </div>
+
+                <div id="applicationsList" aria-live="polite">
+                    <div class="loading">Loading applications...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        © 2026 ScholarLink. Church Scholarship Management System.
+    </footer>
+
+    <script>
+        /* ADMIN SECURITY CHECK */
+        if (sessionStorage.getItem("scholarLinkAdminLoggedIn") !== "true") {
+            window.location.href = "admin-login.html";
+        }
+
+        /* ADMIN LOGOUT */
+        function logoutAdmin() {
+            sessionStorage.removeItem("scholarLinkAdminLoggedIn");
+            window.location.href = "admin-login.html";
+        }
+
+        /* APPLICATION DATA */
+        let applications = [];
+
+        /* LOAD APPLICATIONS FROM SQL SERVER */
+        async function loadApplications() {
+            const applicationsList = document.getElementById("applicationsList");
+
+            applicationsList.innerHTML = `
+                <div class="loading">Loading applications from SQL Server...</div>
+            `;
+
+            try {
+                const response = await fetch("/api/applications");
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message || "Failed to load applications."
+                    );
+                }
+
+                applications = result.applications || [];
+                updateStatistics();
+                displayApplications();
+            } catch (error) {
+                console.error("Error loading applications:", error);
+
+                applicationsList.innerHTML = `
+                    <div class="error-message">
+                        Unable to load applications from SQL Server.
+                        <br><br>
+                        ${escapeHTML(error.message)}
+                    </div>
+                `;
+
+                document.getElementById("filteredCount").textContent =
+                    "Unavailable";
+            }
+        }
+
+        /* UPDATE STATISTICS */
+        function updateStatistics() {
+            document.getElementById("totalApplications").textContent =
+                applications.length;
+
+            const church30ad = applications.filter(function(application) {
+                return application.CHURCH_NAME === "Church of Christ 30 A.D.";
+            });
+
+            const destiny = applications.filter(function(application) {
+                return application.CHURCH_NAME === "Destiny Church";
+            });
+
+            document.getElementById("church30adApplications").textContent =
+                church30ad.length;
+
+            document.getElementById("destinyApplications").textContent =
+                destiny.length;
+        }
+
+        /* CHANGE APPLICATION STATUS */
+        async function changeStatus(applicationId, statusId) {
+            try {
+                const response = await fetch(
+                    `/api/applications/${encodeURIComponent(applicationId)}/status`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            statusId: Number(statusId)
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message || "Failed to update status."
+                    );
+                }
+
+                alert("Application status updated successfully.");
+                await loadApplications();
+            } catch (error) {
+                console.error("Status update failed:", error);
+
+                alert(
+                    "Unable to update application status: " + error.message
+                );
+
+                await loadApplications();
+            }
+        }
+
+        /* DISPLAY APPLICATIONS */
+        function displayApplications() {
+            const filter = document.getElementById("churchFilter").value;
+            const applicationsList = document.getElementById("applicationsList");
+
+            let filteredApplications = applications;
+
+            if (filter !== "all") {
+                filteredApplications = applications.filter(function(application) {
+                    return application.CHURCH_NAME === filter;
+                });
+            }
+
+            document.getElementById("filteredCount").textContent =
+                filteredApplications.length +
+                (filteredApplications.length === 1
+                    ? " application"
+                    : " applications");
+
+            if (filteredApplications.length === 0) {
+                applicationsList.innerHTML = `
+                    <div class="no-applications">
+                        <div style="font-size:32px; margin-bottom:10px;">📄</div>
+                        <strong>No applications found</strong>
+                        <br>
+                        There are no applications for this selection yet.
+                    </div>
+                `;
+                return;
+            }
+
+            applicationsList.innerHTML = "";
+
+            filteredApplications.forEach(function(application) {
+                const firstName = application.FIRST_NAME || "";
+                const surname = application.LAST_NAME || "";
+                const email = application.EMAIL || "";
+                const studentNumber = application.CURRENT_STUDENT_NUMBER || "";
+                const institution = application.CURRENT_INSTITUTION_NAME || "";
+                const fieldOfStudy = application.CURRENT_FIELD_OF_STUDY || "";
+                const qualification = application.CURRENT_QUALIFICATION_NAME || "";
+                const degreeType = application.CURRENT_DEGREE_TYPE || "";
+                const church = application.CHURCH_NAME || "";
+                const scholarship = application.SCHOLARSHIP_NAME || "";
+                const status = application.STATUS_NAME || "Submitted";
+                const applicationId = application.APPLICATION_ID;
+
+                const card = document.createElement("article");
+                card.className = "application-card";
+
+                card.innerHTML = `
+                    <div class="applicant-header">
+                        <div>
+                            <h3 class="applicant-name">
+                                ${escapeHTML(firstName)} ${escapeHTML(surname)}
+                            </h3>
+                            <span class="applicant-subtitle">
+                                Application #${escapeHTML(applicationId)}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Church</span>
+                            <div class="detail-value">${escapeHTML(church)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Scholarship</span>
+                            <div class="detail-value">${escapeHTML(scholarship)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Email</span>
+                            <div class="detail-value">${escapeHTML(email)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Student Number</span>
+                            <div class="detail-value">${escapeHTML(studentNumber)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Institution</span>
+                            <div class="detail-value">${escapeHTML(institution)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Field of Study</span>
+                            <div class="detail-value">${escapeHTML(fieldOfStudy)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Qualification</span>
+                            <div class="detail-value">${escapeHTML(qualification)}</div>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label">Degree Type</span>
+                            <div class="detail-value">${escapeHTML(degreeType)}</div>
+                        </div>
+                    </div>
+
+                    <div class="application-actions">
+                        <a
+                            href="application-details.html?id=${encodeURIComponent(applicationId ?? "")}"
+                            class="view-button"
+                        >
+                            View Full Application →
+                        </a>
+                    </div>
+
+                    <div class="status-box">
+                        <div class="status-heading">
+                            <label for="status-${escapeHTML(applicationId)}">
+                                Application Status
+                            </label>
+                        </div>
+
+                        <select id="status-${escapeHTML(applicationId)}"
+                            aria-label="Change application status">
+                            <option value="1" ${status === "Submitted" ? "selected" : ""}>Submitted</option>
+                            <option value="2" ${status === "Under Review" ? "selected" : ""}>Under Review</option>
+                            <option value="3" ${status === "Approved" ? "selected" : ""}>Approved</option>
+                            <option value="4" ${status === "Rejected" ? "selected" : ""}>Rejected</option>
+                            <option value="5" ${status === "Pending Documents" ? "selected" : ""}>Pending Documents</option>
+                            <option value="6" ${status === "Interview" ? "selected" : ""}>Interview</option>
+                            <option value="7" ${status === "Allocated" ? "selected" : ""}>Allocated</option>
+                        </select>
+
+                        <div class="current-status">
+                            Current Status: ${escapeHTML(status)}
+                        </div>
+                    </div>
+                `;
+
+                const statusSelect = card.querySelector("select");
+                statusSelect.addEventListener("change", function() {
+                    changeStatus(applicationId, this.value);
+                });
+
+                applicationsList.appendChild(card);
+            });
+        }
+
+        /* ESCAPE HTML */
+        function escapeHTML(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        /* START DASHBOARD */
+        loadApplications();
+    </script>
+</body>
+</html>

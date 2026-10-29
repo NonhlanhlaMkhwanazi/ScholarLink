@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Application Submitted - ScholarLink
+    </title>
+
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background-image: url("background.png");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            color: #000000;
+
+        }
+
+
+        nav {
+
+            background-color: #800020;
+
+            padding: 15px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .logo {
+
+            color: white;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+        }
+
+
+        nav a {
+
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 25px;
+
+            font-weight: bold;
+
+        }
+
+
+        nav a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .success-container {
+
+            width: 80%;
+
+            max-width: 700px;
+
+            margin: 80px auto;
+
+            background-color:
+                rgba(255, 255, 255, 0.96);
+
+            padding: 50px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.3);
+
+        }
+
+
+        .success-icon {
+
+            font-size: 60px;
+
+            color: #800020;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        h1 {
+
+            color: #800020;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        p {
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .application-id-box {
+
+            margin: 25px 0;
+
+            padding: 20px;
+
+            background-color: #f5f5f5;
+
+            border-left:
+                5px solid #800020;
+
+        }
+
+
+        .application-id {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            color: #800020;
+
+            margin-top: 10px;
+
+            word-break: break-all;
+
+        }
+
+
+        .warning {
+
+            font-size: 15px;
+
+            color: #000000;
+
+        }
+
+
+        .button {
+
+            display: inline-block;
+
+            margin: 10px 5px;
+
+            padding: 14px 25px;
+
+            background-color: #800020;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+        }
+
+
+        .button:hover {
+
+            background-color: #5A0018;
+
+        }
+
+
+        footer {
+
+            background-color: #5A0018;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 100px;
+
+        }
+
+
+        footer p {
+
+            font-size: 14px;
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .success-container {
+
+                width: 85%;
+
+                padding: 30px 20px;
+
+                box-sizing: border-box;
+
+            }
+
+
+            nav {
+
+                padding: 15px 20px;
+
+            }
+
+
+            nav a {
+
+                margin-left: 10px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+
+        ScholarLink
+
+    </div>
+
+
+    <div>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="scholarships.html">
+            Scholarships
+        </a>
+
+        <a href="application-status.html">
+            Check Status
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<div class="success-container">
+
+
+    <div class="success-icon">
+
+        ✓
+
+    </div>
+
+
+    <h1>
+
+        Application Submitted Successfully!
+
+    </h1>
+
+
+    <p>
+
+        Thank you for submitting your scholarship
+        application through ScholarLink.
+
+    </p>
+
+
+
+    <div class="application-id-box">
+
+
+        <p>
+
+            <strong>
+                Your Application ID is:
+            </strong>
+
+        </p>
+
+
+        <div
+            class="application-id"
+            id="applicationId"
+        >
+
+            Loading...
+
+        </div>
+
+
+        <p class="warning">
+
+            <strong>
+                Important:
+            </strong>
+
+            Please save this Application ID.
+            You will need it to check the status
+            of your application.
+
+        </p>
+
+
+    </div>
+
+
+
+    <div class="application-id-box">
+
+
+        <p>
+
+            <strong>
+                What happens next?
+            </strong>
+
+        </p>
+
+
+        <p>
+
+            Your application has been recorded
+            and will be reviewed by the relevant
+            church scholarship team.
+
+        </p>
+
+
+        <p>
+
+            Please keep your information and
+            supporting documents available in case
+            additional information is required.
+
+        </p>
+
+
+    </div>
+
+
+
+    <a
+        href="application-status.html"
+        id="statusButton"
+        class="button"
+    >
+
+        Check Application Status
+
+    </a>
+
+
+    <a
+        href="scholarships.html"
+        class="button"
+    >
+
+        Back to Scholarships
+
+    </a>
+
+
+</div>
+
+
+
+<footer>
+
+    <p>
+
+        © 2026 ScholarLink.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+<script>
+
+// GET APPLICATION ID FROM URL//
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const applicationId =
+        urlParams.get("id");
+
+
+    const applicationIdElement =
+        document.getElementById(
+            "applicationId"
+        );
+
+
+    const statusButton =
+        document.getElementById(
+            "statusButton"
+        );
+
+
+
+     // DISPLAY APPLICATION ID//
+
+    if (applicationId) {
+
+
+        applicationIdElement.textContent =
+            applicationId;
+
+
+        // Send ID to status page
+
+        statusButton.href =
+            "application-status.html?id=" +
+            encodeURIComponent(applicationId);
+
+
+    }
+
+    else {
+
+
+        applicationIdElement.textContent =
+            "Application ID not available";
+
+
+        statusButton.href =
+            "application-status.html";
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

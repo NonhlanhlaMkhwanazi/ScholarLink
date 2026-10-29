@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarLink - Application</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #000000;
+        }
+
+        nav {
+            background-color: #800020;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 900px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #800020;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            color: #800020;
+            border-bottom: 2px solid #800020;
+            padding-bottom: 8px;
+            margin-top: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+            color: #000000;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border: 2px solid #800020;
+        }
+
+        .readonly {
+            background-color: #eeeeee;
+        }
+
+        .required {
+            color: #800020;
+        }
+
+        .file-info {
+            font-size: 14px;
+            margin-top: 7px;
+            color: #000000;
+        }
+
+        .declaration {
+            background-color: #f5f5f5;
+            border-left: 5px solid #800020;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-container input {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #800020;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #5A0018;
+        }
+
+        .submit-button:disabled {
+            background-color: #999999;
+            cursor: not-allowed;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #eeeeee;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #dddddd;
+        }
+
+        footer {
+            background-color: #5A0018;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: 90%;
+                padding: 25px;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        ScholarLink
+    </div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="scholarships.html">Scholarships</a>
+        <a href="application-status.html">Check Status</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>Scholarship Application</h1>
+
+    <p class="subtitle">
+        Please complete all required information carefully.
+    </p>
+
+
+    <!-- SCHOLARSHIP INFORMATION -->
+
+    <h2>Scholarship Information</h2>
+
+    <div class="form-group">
+
+        <label>
+            Selected Scholarship
+        </label>
+
+        <input
+            type="text"
+            id="churchName"
+            class="readonly"
+            readonly
+        >
+
+    </div>
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <h2>Personal Information</h2>
+
+    <div class="form-group">
+
+        <label for="firstName">
+            First Name <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="firstName"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="surname">
+            Surname <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="surname"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="email">
+            Email Address <span class="required">*</span>
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="phone">
+            Phone Number <span class="required">*</span>
+        </label>
+
+        <input
+            type="tel"
+            id="phone"
+            required
+        >
+
+    </div>
+
+
+    <!-- ACADEMIC INFORMATION -->
+
+    <h2>Academic Information</h2>
+
+
+    <div class="form-group">
+
+        <label for="studentNumber">
+            Student Number <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="studentNumber"
+            required
+        >
+
+    </div>
+
+<div class="form-group">
+
+    <label for="institution">
+        Institution <span class="required">*</span>
+    </label>
+
+    <select id="institution" required>
+
+        <option value="">
+            Select Institution
+        </option>
+
+        <option value="1">
+            University of Fort Hare
+        </option>
+
+        <option value="2">
+            Walter Sisulu University
+        </option>
+
+        <option value="3">
+            Nelson Mandela University
+        </option>
+
+        <option value="4">
+            University of Johannesburg
+        </option>
+
+        <option value="5">
+            University of Cape Town
+        </option>
+
+        <option value="6">
+            University of Pretoria
+        </option>
+
+    </select>
+
+</div>
+<div class="form-group">
+
+    <label for="fieldOfStudy">
+        Field of Study <span class="required">*</span>
+    </label>
+
+    <select id="fieldOfStudy" required>
+
+        <option value="">
+            Select Field of Study
+        </option>
+
+        <option value="1">
+            Computer Science
+        </option>
+
+        <option value="2">
+            Information Technology
+        </option>
+
+        <option value="3">
+            Accounting
+        </option>
+
+        <option value="4">
+            Business Management
+        </option>
+
+        <option value="5">
+            Education
+        </option>
+
+        <option value="6">
+            Engineering
+        </option>
+
+        <option value="7">
+            Law
+        </option>
+
+        <option value="8">
+            Medicine
+        </option>
+
+        <option value="9">
+            Social Sciences
+        </option>
+
+        <option value="10">
+            Agriculture
+        </option>
+
+        <option value="11">
+            Other
+        </option>
+
+    </select>
+
+</div>
+
+
+    <div class="form-group">
+
+        <label for="studyLevel">
+            Study Level <span class="required">*</span>
+        </label>
+
+        <select id="studyLevel" required>
+
+            <option value="">
+                Select Study Level
+            </option>
+
+            <option value="Undergraduate">
+                Undergraduate
+            </option>
+
+            <option value="Postgraduate">
+                Postgraduate
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="qualificationType">
+            Qualification Type <span class="required">*</span>
+        </label>
+
+        <select id="qualificationType" required>
+
+            <option value="">
+                Select Qualification
+            </option>
+
+            <option value="Certificate">
+                Certificate
+            </option>
+
+            <option value="Diploma">
+                Diploma
+            </option>
+
+            <option value="Advanced Diploma">
+                Advanced Diploma
+            </option>
+
+            <option value="Bachelor's Degree">
+                Bachelor's Degree
+            </option>
+
+            <option value="Honours">
+                Honours
+            </option>
+
+            <option value="Master's">
+                Master's
+            </option>
+
+            <option value="Doctoral">
+                Doctoral
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="programme">
+            Programme / Course <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="programme"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="yearOfStudy">
+            Year of Study <span class="required">*</span>
+        </label>
+
+        <input
+            type="number"
+            id="yearOfStudy"
+            min="1"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="academicAverage">
+            Academic Average / Overall Mark
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="number"
+            id="academicAverage"
+            min="0"
+            max="100"
+            step="0.01"
+            required
+        >
+
+    </div>
+
+
+    <!-- CHURCH MEMBERSHIP -->
+
+    <h2>Church Membership</h2>
+
+
+    <div class="form-group">
+
+        <label for="churchField">
+            Church <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="churchField"
+            class="readonly"
+            readonly
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="membershipDuration">
+            How long have you been a member?
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="membershipDuration"
+            placeholder="Example: 3 years"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="churchBranch">
+            Church Branch / Congregation
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="churchBranch"
+            required
+        >
+
+    </div>
+
+
+    <!-- FINANCIAL INFORMATION -->
+
+    <h2>Financial Information</h2>
+
+
+    <div class="form-group">
+
+        <label for="otherFunding">
+            Are you receiving other funding?
+            <span class="required">*</span>
+        </label>
+
+        <select id="otherFunding" required>
+
+            <option value="">
+                Select an option
+            </option>
+
+            <option value="Yes">
+                Yes
+            </option>
+
+            <option value="No">
+                No
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="fundingSource">
+            Funding Source
+        </label>
+
+        <input
+            type="text"
+            id="fundingSource"
+            placeholder="If applicable"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="financialNeed">
+            Explain your financial need
+            <span class="required">*</span>
+        </label>
+
+        <textarea
+            id="financialNeed"
+            required
+        ></textarea>
+
+    </div>
+
+
+    <!-- DOCUMENTS -->
+
+    <h2>Supporting Documents</h2>
+
+
+    <div class="form-group">
+
+        <label for="academicRecord">
+            Academic Record <span class="required">*</span>
+        </label>
+
+        <input
+            type="file"
+            id="academicRecord"
+            accept=".pdf,.jpg,.jpeg,.png"
+            required
+        >
+
+        <div
+            class="file-info"
+            id="academicRecordName"
+        ></div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="registration">
+            Proof of Registration <span class="required">*</span>
+        </label>
+
+        <input
+            type="file"
+            id="registration"
+            accept=".pdf,.jpg,.jpeg,.png"
+            required
+        >
+
+        <div
+            class="file-info"
+            id="registrationName"
+        ></div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="idDocument">
+            ID Document <span class="required">*</span>
+        </label>
+
+        <input
+            type="file"
+            id="idDocument"
+            accept=".pdf,.jpg,.jpeg,.png"
+            required
+        >
+
+        <div
+            class="file-info"
+            id="idDocumentName"
+        ></div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="additionalDocument">
+            Additional Document
+        </label>
+
+        <input
+            type="file"
+            id="additionalDocument"
+            accept=".pdf,.jpg,.jpeg,.png"
+        >
+
+        <div
+            class="file-info"
+            id="additionalDocumentName"
+        ></div>
+
+    </div>
+
+
+    <!-- DECLARATION -->
+
+    <div class="declaration">
+
+        <div class="checkbox-container">
+
+            <input
+                type="checkbox"
+                id="declaration"
+                required
+            >
+
+            <label for="declaration">
+                I declare that the information provided in this
+                application is true and correct. I understand that
+                providing false information may result in my
+                application being rejected.
+                <span class="required">*</span>
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="submit-button"
+        id="submitButton"
+        onclick="submitApplication()"
+    >
+        Submit Application
+    </button>
+
+
+    <a
+        href="scholarships.html"
+        class="back-button"
+    >
+        Back to Scholarships
+    </a>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 ScholarLink. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- DOCUMENT STORAGE -->
+
+<script src="document-storage.js"></script>
+
+
+<script>
+
+    // GET SELECTED CHURCH// 
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const church =
+        urlParams.get("church");
+
+
+    const churchName =
+        document.getElementById("churchName");
+
+    const churchField =
+        document.getElementById("churchField");
+
+
+     // CHURCH + SCHOLARSHIP IDs//
+
+    let churchId = null;
+    let scholarshipId = null;
+
+
+    if (church === "church30ad") {
+
+        churchId = 1;
+        scholarshipId = 1;
+
+        churchName.value =
+            "Church of Christ 30A.D.";
+
+        churchField.value =
+            "Church of Christ 30A.D.";
+
+    }
+
+    else if (church === "destiny") {
+
+        churchId = 2;
+        scholarshipId = 2;
+
+        churchName.value =
+            "Destiny Church";
+
+        churchField.value =
+            "Destiny Church";
+
+    }
+
+    else {
+
+        churchName.value =
+            "Church Scholarship";
+
+        churchField.value =
+            "Church Scholarship";
+
+    }
+
+
+    // DISPLAY LOGGED-IN USER//
+
+    const currentUser =
+        JSON.parse(
+            sessionStorage.getItem(
+                "scholarLinkCurrentUser"
+            ) || "null"
+        );
+
+
+    if (!currentUser) {
+
+        alert(
+            "Please sign in before completing a scholarship application."
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    // AUTO-FILL PERSONAL INFORMATION//
+
+    if (currentUser) {
+
+        if (currentUser.firstName) {
+
+            document.getElementById(
+                "firstName"
+            ).value =
+                currentUser.firstName;
+
+        }
+
+
+        if (currentUser.surname) {
+
+            document.getElementById(
+                "surname"
+            ).value =
+                currentUser.surname;
+
+        }
+
+
+        if (currentUser.email) {
+
+            document.getElementById(
+                "email"
+            ).value =
+                currentUser.email;
+
+        }
+
+
+        if (currentUser.phone) {
+
+            document.getElementById(
+                "phone"
+            ).value =
+                currentUser.phone;
+
+        }
+
+    }
+
+
+    // DISPLAY SELECTED FILE NAMES//
+    document
+        .getElementById("academicRecord")
+        .addEventListener(
+            "change",
+            function () {
+
+                document.getElementById(
+                    "academicRecordName"
+                ).textContent =
+
+                    this.files.length > 0
+
+                        ? "Selected: " +
+                          this.files[0].name
+
+                        : "";
+
+            }
+        );
+
+
+    document
+        .getElementById("registration")
+        .addEventListener(
+            "change",
+            function () {
+
+                document.getElementById(
+                    "registrationName"
+                ).textContent =
+
+                    this.files.length > 0
+
+                        ? "Selected: " +
+                          this.files[0].name
+
+                        : "";
+
+            }
+        );
+
+
+    document
+        .getElementById("idDocument")
+        .addEventListener(
+            "change",
+            function () {
+
+                document.getElementById(
+                    "idDocumentName"
+                ).textContent =
+
+                    this.files.length > 0
+
+                        ? "Selected: " +
+                          this.files[0].name
+
+                        : "";
+
+            }
+        );
+
+
+    document
+        .getElementById("additionalDocument")
+        .addEventListener(
+            "change",
+            function () {
+
+                document.getElementById(
+                    "additionalDocumentName"
+                ).textContent =
+
+                    this.files.length > 0
+
+                        ? "Selected: " +
+                          this.files[0].name
+
+                        : "";
+
+            }
+        );
+
+
+    // SUBMIT APPLICATION//
+
+    async function submitApplication() {
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        // GET CURRENT USER//
+        const user =
+            JSON.parse(
+                sessionStorage.getItem(
+                    "scholarLinkCurrentUser"
+                ) || "null"
+            );
+
+
+        if (!user || !user.applicantId) {
+
+            alert(
+                "Your applicant account could not be found. Please sign in again."
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+         // GET FORM VALUES//
+
+        const firstName =
+            document
+                .getElementById("firstName")
+                .value
+                .trim();
+
+
+        const surname =
+            document
+                .getElementById("surname")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+        const studentNumber =
+            document
+                .getElementById("studentNumber")
+                .value
+                .trim();
+
+
+        const institutionId =
+            document
+                .getElementById("institution")
+                .value;
+
+
+        const fieldOfStudyId =
+            document
+                .getElementById("fieldOfStudy")
+                .value;
+
+
+        const studyLevel =
+            document
+                .getElementById("studyLevel")
+                .value;
+
+
+        const qualificationType =
+            document
+                .getElementById("qualificationType")
+                .value;
+
+
+        const programme =
+            document
+                .getElementById("programme")
+                .value
+                .trim();
+
+
+        const yearOfStudy =
+            document
+                .getElementById("yearOfStudy")
+                .value;
+
+
+        const academicAverage =
+            document
+                .getElementById("academicAverage")
+                .value;
+
+
+        const membershipDuration =
+            document
+                .getElementById("membershipDuration")
+                .value
+                .trim();
+
+
+        const churchBranch =
+            document
+                .getElementById("churchBranch")
+                .value
+                .trim();
+
+
+        const otherFunding =
+            document
+                .getElementById("otherFunding")
+                .value;
+
+
+        const fundingSource =
+            document
+                .getElementById("fundingSource")
+                .value
+                .trim();
+
+
+        const financialNeed =
+            document
+                .getElementById("financialNeed")
+                .value
+                .trim();
+
+
+        //  GET FILES//
+        const academicRecord =
+            document
+                .getElementById("academicRecord")
+                .files[0];
+
+
+        const registration =
+            document
+                .getElementById("registration")
+                .files[0];
+
+
+        const idDocument =
+            document
+                .getElementById("idDocument")
+                .files[0];
+
+
+        const additionalFile =
+            document
+                .getElementById("additionalDocument")
+                .files[0];
+
+
+        // VALIDATE TEXT FIELDS//
+        if (
+            !firstName ||
+            !surname ||
+            !email ||
+            !phone ||
+            !studentNumber ||
+            !institutionId ||
+            !fieldOfStudyId ||
+            !studyLevel ||
+            !qualificationType ||
+            !programme ||
+            !yearOfStudy ||
+            !academicAverage ||
+            !membershipDuration ||
+            !churchBranch ||
+            !otherFunding ||
+            !financialNeed
+        ) {
+
+            alert(
+                "Please complete all required fields."
+            );
+
+            return;
+
+        }
+
+
+        // VALIDATE CHURCH//
+
+        if (
+            !churchId ||
+            !scholarshipId
+        ) {
+
+            alert(
+                "Please open this application from a valid scholarship page."
+            );
+
+            return;
+
+        }
+
+
+        // VALIDATE DOCUMENTS//
+        if (
+            !academicRecord ||
+            !registration ||
+            !idDocument
+        ) {
+
+            alert(
+                "Please upload the Academic Record, Proof of Registration and ID Document."
+            );
+
+            return;
+
+        }
+
+
+        // VALIDATE DECLARATION//
+        const declaration =
+            document.getElementById(
+                "declaration"
+            );
+
+
+        if (!declaration.checked) {
+
+            alert(
+                "Please accept the declaration before submitting."
+            );
+
+            return;
+
+        }
+
+
+        // QUALIFICATION → DATABASE DEGREE TYPE ID//
+        const degreeTypeMap = {
+
+            "Certificate": 1,
+
+            "Diploma": 2,
+
+            "Advanced Diploma": 3,
+
+            "Bachelor's Degree": 4,
+
+            "Honours": 5,
+
+            "Master's": 6,
+
+            "Doctoral": 7
+
+        };
+
+
+        const degreeTypeId =
+            degreeTypeMap[
+                qualificationType
+            ];
+
+
+        if (!degreeTypeId) {
+
+            alert(
+                "Please select a valid qualification type."
+            );
+
+            return;
+
+        }
+
+
+       // DISABLE BUTTON//
+        submitButton.disabled =
+            true;
+
+        submitButton.textContent =
+            "Submitting Application...";
+
+
+        try {
+
+           // CREATE FORM DATA//
+
+            const formData =
+                new FormData();
+
+
+             // DATABASE IDs//
+            formData.append(
+                "applicantId",
+                user.applicantId
+            );
+
+
+            formData.append(
+                "churchId",
+                churchId
+            );
+
+
+            formData.append(
+                "scholarshipId",
+                scholarshipId
+            );
+
+
+            formData.append(
+                "institutionId",
+                institutionId
+            );
+
+
+            formData.append(
+                "fieldOfStudyId",
+                fieldOfStudyId
+            );
+
+
+            formData.append(
+                "degreeTypeId",
+                degreeTypeId
+            );
+
+
+             // APPLICATION INFORMATION//
+            formData.append(
+                "studyingCurrentYear",
+                "YES"
+            );
+
+
+            formData.append(
+                "studentNumber",
+                studentNumber
+            );
+
+
+            formData.append(
+                "qualificationName",
+                programme
+            );
+
+
+            formData.append(
+                "currentTertiaryYearsCount",
+                yearOfStudy
+            );
+
+
+            formData.append(
+                "churchMember",
+                "YES"
+            );
+
+
+             // FILES//
+            formData.append(
+                "academicRecord",
+                academicRecord
+            );
+
+
+            formData.append(
+                "registration",
+                registration
+            );
+
+
+            formData.append(
+                "idDocument",
+                idDocument
+            );
+
+
+            if (additionalFile) {
+
+                formData.append(
+                    "additionalDocument",
+                    additionalFile
+                );
+
+            }
+
+
+            // SEND TO NODE.JS//
+            const response =
+                await fetch(
+                    "/api/applications",
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+// CHECK RESPONSE//
+            if (
+                !response.ok ||
+                !result.success
+            ) {
+
+                throw new Error(
+                    result.message ||
+                    "Application submission failed."
+                );
+
+            }
+
+
+           // SUCCESS//
+            window.location.href =
+                "application-success.html?id=" +
+                encodeURIComponent(
+                    result.applicationId
+                );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Application submission error:",
+                error
+            );
+
+
+            alert(
+                error.message ||
+                "There was a problem submitting your application. Please try again."
+            );
+
+
+            submitButton.disabled =
+                false;
+
+
+            submitButton.textContent =
+                "Submit Application";
+
+        }
+
+    }
+
+</script>
+</body>
+</html>

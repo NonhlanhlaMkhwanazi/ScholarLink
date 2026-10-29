@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Application Details - ScholarLink</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+
+            background-image: url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #000000;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background-color: #800020;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+
+            margin: 40px auto;
+
+            background-color: rgba(255, 255, 255, 0.95);
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #800020;
+            margin-bottom: 5px;
+        }
+
+        .application-id {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            background-color: #800020;
+            color: white;
+
+            padding: 12px 15px;
+
+            border-radius: 6px;
+
+            font-size: 20px;
+        }
+
+        .details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 15px;
+        }
+
+        .detail-box {
+            background-color: #f5f5f5;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            border-left:
+                4px solid #800020;
+        }
+
+        .detail-box strong {
+            display: block;
+
+            color: #800020;
+
+            margin-bottom: 5px;
+        }
+
+        /* =========================
+           DOCUMENTS
+        ========================= */
+
+        .document-name {
+            display: block;
+
+            margin-bottom: 10px;
+
+            word-break: break-word;
+        }
+
+        .view-document {
+            display: inline-block;
+
+            padding: 9px 16px;
+
+            background-color: #800020;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+        .view-document:hover {
+            background-color: #5c0017;
+        }
+
+        .document-unavailable {
+            color: #777;
+
+            font-style: italic;
+        }
+
+        .loading-document {
+            color: #777;
+
+            font-style: italic;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-section {
+            margin-top: 30px;
+
+            padding: 20px;
+
+            background-color: #f5f5f5;
+
+            border-radius: 8px;
+        }
+
+        .status-section label {
+            font-weight: bold;
+
+            display: block;
+
+            margin-bottom: 8px;
+        }
+
+        select {
+            padding: 10px;
+
+            width: 100%;
+
+            max-width: 400px;
+
+            border: 2px solid #800020;
+
+            border-radius: 5px;
+
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+
+            padding: 12px 25px;
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #5c0017;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            background-color: #800020;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #5c0017;
+        }
+
+        /* =========================
+           NOT FOUND
+        ========================= */
+
+        .not-found {
+            text-align: center;
+
+            padding: 40px;
+
+            color: #800020;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+
+            .container {
+                width: 95%;
+
+                padding: 20px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <h2>
+            ScholarLink
+        </h2>
+
+        <div>
+
+            <a href="scholarships.html">
+                Scholarships
+            </a>
+
+            <a href="admin.html">
+                Admin Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <div
+        class="container"
+        id="applicationContainer"
+    >
+
+        <h1>
+            Application Details
+        </h1>
+
+        <p
+            class="application-id"
+            id="applicationId"
+        ></p>
+
+
+        <!-- =========================
+             PERSONAL INFORMATION
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Personal Information
+            </h2>
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <strong>
+                        First Name
+                    </strong>
+
+                    <span id="firstName"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Surname
+                    </strong>
+
+                    <span id="surname"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Email
+                    </strong>
+
+                    <span id="email"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Phone
+                    </strong>
+
+                    <span id="phone"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             SCHOLARSHIP INFORMATION
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Scholarship Information
+            </h2>
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <strong>
+                        Church
+                    </strong>
+
+                    <span id="church"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Scholarship
+                    </strong>
+
+                    <span id="scholarship"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             ACADEMIC INFORMATION
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Academic Information
+            </h2>
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <strong>
+                        Student Number
+                    </strong>
+
+                    <span id="studentNumber"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Institution
+                    </strong>
+
+                    <span id="institution"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Study Level
+                    </strong>
+
+                    <span id="studyLevel"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Qualification Type
+                    </strong>
+
+                    <span id="qualificationType"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Programme
+                    </strong>
+
+                    <span id="programme"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Year of Study
+                    </strong>
+
+                    <span id="yearOfStudy"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Academic Average
+                    </strong>
+
+                    <span id="academicAverage"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CHURCH MEMBERSHIP
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Church Membership
+            </h2>
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <strong>
+                        Membership Duration
+                    </strong>
+
+                    <span id="membershipDuration"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Church Branch
+                    </strong>
+
+                    <span id="churchBranch"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FINANCIAL INFORMATION
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Financial Information
+            </h2>
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <strong>
+                        Other Funding
+                    </strong>
+
+                    <span id="otherFunding"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Funding Source
+                    </strong>
+
+                    <span id="fundingSource"></span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <strong>
+                        Financial Need
+                    </strong>
+
+                    <span id="financialNeed"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             UPLOADED DOCUMENTS
+        ========================= -->
+
+        <div class="section">
+
+            <h2>
+                Uploaded Documents
+            </h2>
+
+            <div class="details">
+
+
+                <!-- ACADEMIC RECORD -->
+
+                <div class="detail-box">
+
+                    <strong>
+                        Academic Record
+                    </strong>
+
+                    <span
+                        id="academicRecord"
+                        class="document-name"
+                    ></span>
+
+                    <div
+                        id="academicRecordButton"
+                    >
+
+                        <span class="loading-document">
+                            Loading document...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REGISTRATION -->
+
+                <div class="detail-box">
+
+                    <strong>
+                        Registration Document
+                    </strong>
+
+                    <span
+                        id="registration"
+                        class="document-name"
+                    ></span>
+
+                    <div
+                        id="registrationButton"
+                    >
+
+                        <span class="loading-document">
+                            Loading document...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ID DOCUMENT -->
+
+                <div class="detail-box">
+
+                    <strong>
+                        ID Document
+                    </strong>
+
+                    <span
+                        id="idDocument"
+                        class="document-name"
+                    ></span>
+
+                    <div
+                        id="idDocumentButton"
+                    >
+
+                        <span class="loading-document">
+                            Loading document...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDITIONAL DOCUMENT -->
+
+                <div class="detail-box">
+
+                    <strong>
+                        Additional Document
+                    </strong>
+
+                    <span
+                        id="additionalDocument"
+                        class="document-name"
+                    ></span>
+
+                    <div
+                        id="additionalDocumentButton"
+                    >
+
+                        <span class="loading-document">
+                            Loading document...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             APPLICATION STATUS
+        ========================= -->
+
+        <div class="status-section">
+
+            <label for="status">
+
+                Application Status
+
+            </label>
+
+
+            <select id="status">
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="Under Review">
+                    Under Review
+                </option>
+
+                <option value="Approved">
+                    Approved
+                </option>
+
+                <option value="Rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <br>
+
+
+            <button onclick="updateStatus()">
+
+                Save Status
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             BACK BUTTON
+        ========================= -->
+
+        <a
+            href="admin.html"
+            class="back-button"
+        >
+
+            ← Back to Admin Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         DOCUMENT STORAGE SCRIPT
+    ========================= -->
+
+    <script src="document-storage.js"></script>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =====================================================
+           ADMIN SECURITY CHECK
+           ===================================================== */
+
+        if (
+            sessionStorage.getItem(
+                "scholarLinkAdminLoggedIn"
+            ) !== "true"
+        ) {
+
+            window.location.href =
+                "admin-login.html";
+
+        }
+
+
+        /* =====================================================
+           GET APPLICATION ID
+           ===================================================== */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const applicationId =
+            urlParams.get("id");
+
+
+        /* =====================================================
+           GET APPLICATIONS
+           ===================================================== */
+
+        let applications =
+            JSON.parse(
+                localStorage.getItem(
+                    "scholarLinkApplications"
+                )
+            ) || [];
+
+
+        /* =====================================================
+           FIND APPLICATION
+           ===================================================== */
+
+        const application =
+            applications.find(
+
+                function(app) {
+
+                    return String(app.id) ===
+                        String(applicationId);
+
+                }
+
+            );
+
+
+        /* =====================================================
+           OPEN DOCUMENT DATABASE
+           ===================================================== */
+
+        const DOCUMENT_DB_NAME =
+            "ScholarLinkDocumentsDB";
+
+
+        const DOCUMENT_DB_VERSION = 1;
+
+
+        const DOCUMENT_STORE_NAME =
+            "documents";
+
+
+        /* =====================================================
+           OPEN DATABASE
+           ===================================================== */
+
+        function openDocumentDatabase() {
+
+            return new Promise(
+                function(resolve, reject) {
+
+                    const request =
+                        indexedDB.open(
+                            DOCUMENT_DB_NAME,
+                            DOCUMENT_DB_VERSION
+                        );
+
+
+                    request.onsuccess =
+                        function(event) {
+
+                            resolve(
+                                event.target.result
+                            );
+
+                        };
+
+
+                    request.onerror =
+                        function(event) {
+
+                            reject(
+                                event.target.error
+                            );
+
+                        };
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           GET STORED DOCUMENT
+           ===================================================== */
+
+        async function getStoredDocument(
+            appId,
+            documentType
+        ) {
+
+            const db =
+                await openDocumentDatabase();
+
+
+            return new Promise(
+                function(resolve, reject) {
+
+                    const transaction =
+                        db.transaction(
+                            DOCUMENT_STORE_NAME,
+                            "readonly"
+                        );
+
+
+                    const store =
+                        transaction.objectStore(
+                            DOCUMENT_STORE_NAME
+                        );
+
+
+                    const documentId =
+                        String(appId) +
+                        "_" +
+                        documentType;
+
+
+                    const request =
+                        store.get(documentId);
+
+
+                    request.onsuccess =
+                        function(event) {
+
+                            resolve(
+                                event.target.result
+                            );
+
+                        };
+
+
+                    request.onerror =
+                        function(event) {
+
+                            reject(
+                                event.target.error
+                            );
+
+                        };
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           SHOW DOCUMENT BUTTON
+           ===================================================== */
+
+        async function showDocumentButton(
+            documentType,
+            buttonId,
+            fileName
+        ) {
+
+            const buttonContainer =
+                document.getElementById(
+                    buttonId
+                );
+
+
+            /* -------------------------
+               NO FILE
+            ------------------------- */
+
+            if (!fileName) {
+
+                buttonContainer.innerHTML =
+                    `
+                    <span class="document-unavailable">
+                        No document uploaded
+                    </span>
+                    `;
+
+                return;
+
+            }
+
+
+            try {
+
+                /* -------------------------
+                   GET FILE FROM INDEXEDDB
+                ------------------------- */
+
+                const storedDocument =
+                    await getStoredDocument(
+                        applicationId,
+                        documentType
+                    );
+
+
+                /* -------------------------
+                   FILE NOT FOUND
+                ------------------------- */
+
+                if (
+                    !storedDocument ||
+                    !storedDocument.file
+                ) {
+
+                    buttonContainer.innerHTML =
+                        `
+                        <span class="document-unavailable">
+                            Document file not available
+                        </span>
+                        `;
+
+                    return;
+
+                }
+
+
+                /* -------------------------
+                   CREATE FILE URL
+                ------------------------- */
+
+                const fileURL =
+                    URL.createObjectURL(
+                        storedDocument.file
+                    );
+
+
+                /* -------------------------
+                   CREATE VIEW BUTTON
+                ------------------------- */
+
+                const button =
+                    document.createElement("a");
+
+
+                button.href =
+                    fileURL;
+
+
+                button.target =
+                    "_blank";
+
+
+                button.rel =
+                    "noopener noreferrer";
+
+
+                button.className =
+                    "view-document";
+
+
+                button.textContent =
+                    "View Document";
+
+
+                buttonContainer.innerHTML =
+                    "";
+
+
+                buttonContainer.appendChild(
+                    button
+                );
+
+            }
+
+
+            catch(error) {
+
+                console.error(
+                    "Error loading document:",
+                    error
+                );
+
+
+                buttonContainer.innerHTML =
+                    `
+                    <span class="document-unavailable">
+                        Unable to load document
+                    </span>
+                    `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CHECK APPLICATION
+           ===================================================== */
+
+        if (!application) {
+
+            document.getElementById(
+                "applicationContainer"
+            ).innerHTML = `
+
+                <div class="not-found">
+
+                    <h1>
+                        Application Not Found
+                    </h1>
+
+                    <p>
+                        The application could not
+                        be found.
+                    </p>
+
+                    <a
+                        href="admin.html"
+                        class="back-button"
+                    >
+
+                        Back to Admin Dashboard
+
+                    </a>
+
+                </div>
+
+            `;
+
+        }
+
+
+        else {
+
+
+            /* =================================================
+               APPLICATION ID
+               ================================================= */
+
+            document.getElementById(
+                "applicationId"
+            ).textContent =
+
+                "Application ID: " +
+                application.id;
+
+
+            /* =================================================
+               PERSONAL INFORMATION
+               ================================================= */
+
+            document.getElementById(
+                "firstName"
+            ).textContent =
+                application.firstName || "";
+
+
+            document.getElementById(
+                "surname"
+            ).textContent =
+                application.surname || "";
+
+
+            document.getElementById(
+                "email"
+            ).textContent =
+                application.email || "";
+
+
+            document.getElementById(
+                "phone"
+            ).textContent =
+                application.phone || "";
+
+
+            /* =================================================
+               SCHOLARSHIP INFORMATION
+               ================================================= */
+
+            document.getElementById(
+                "church"
+            ).textContent =
+                application.church || "";
+
+
+            document.getElementById(
+                "scholarship"
+            ).textContent =
+                application.scholarship || "";
+
+
+            /* =================================================
+               ACADEMIC INFORMATION
+               ================================================= */
+
+            document.getElementById(
+                "studentNumber"
+            ).textContent =
+                application.studentNumber || "";
+
+
+            document.getElementById(
+                "institution"
+            ).textContent =
+                application.institution || "";
+
+
+            document.getElementById(
+                "studyLevel"
+            ).textContent =
+                application.studyLevel || "";
+
+
+            document.getElementById(
+                "qualificationType"
+            ).textContent =
+                application.qualificationType || "";
+
+
+            document.getElementById(
+                "programme"
+            ).textContent =
+                application.programme || "";
+
+
+            document.getElementById(
+                "yearOfStudy"
+            ).textContent =
+                application.yearOfStudy || "";
+
+
+            document.getElementById(
+                "academicAverage"
+            ).textContent =
+                application.academicAverage || "";
+
+
+            /* =================================================
+               CHURCH MEMBERSHIP
+               ================================================= */
+
+            document.getElementById(
+                "membershipDuration"
+            ).textContent =
+                application.membershipDuration || "";
+
+
+            document.getElementById(
+                "churchBranch"
+            ).textContent =
+                application.churchBranch || "";
+
+
+            /* =================================================
+               FINANCIAL INFORMATION
+               ================================================= */
+
+            document.getElementById(
+                "otherFunding"
+            ).textContent =
+                application.otherFunding || "";
+
+
+            document.getElementById(
+                "fundingSource"
+            ).textContent =
+                application.fundingSource || "";
+
+
+            document.getElementById(
+                "financialNeed"
+            ).textContent =
+                application.financialNeed || "";
+
+
+            /* =================================================
+               DOCUMENT FILENAMES
+               ================================================= */
+
+            document.getElementById(
+                "academicRecord"
+            ).textContent =
+                application.academicRecord ||
+                "No document";
+
+
+            document.getElementById(
+                "registration"
+            ).textContent =
+                application.registration ||
+                "No document";
+
+
+            document.getElementById(
+                "idDocument"
+            ).textContent =
+                application.idDocument ||
+                "No document";
+
+
+            document.getElementById(
+                "additionalDocument"
+            ).textContent =
+                application.additionalDocument ||
+                "None";
+
+
+            /* =================================================
+               LOAD ACADEMIC RECORD
+               ================================================= */
+
+            showDocumentButton(
+                "academicRecord",
+                "academicRecordButton",
+                application.academicRecord
+            );
+
+
+            /* =================================================
+               LOAD REGISTRATION
+               ================================================= */
+
+            showDocumentButton(
+                "registration",
+                "registrationButton",
+                application.registration
+            );
+
+
+            /* =================================================
+               LOAD ID DOCUMENT
+               ================================================= */
+
+            showDocumentButton(
+                "idDocument",
+                "idDocumentButton",
+                application.idDocument
+            );
+
+
+            /* =================================================
+               LOAD ADDITIONAL DOCUMENT
+               ================================================= */
+
+            showDocumentButton(
+                "additionalDocument",
+                "additionalDocumentButton",
+                application.additionalDocument
+            );
+
+
+            /* =================================================
+               STATUS
+               ================================================= */
+
+            document.getElementById(
+                "status"
+            ).value =
+                application.status ||
+                "Pending";
+
+        }
+
+
+        /* =====================================================
+           UPDATE STATUS
+           ===================================================== */
+
+        function updateStatus() {
+
+            const newStatus =
+                document.getElementById(
+                    "status"
+                ).value;
+
+
+            const index =
+                applications.findIndex(
+
+                    function(app) {
+
+                        return String(app.id) ===
+                            String(applicationId);
+
+                    }
+
+                );
+
+
+            if (index !== -1) {
+
+                applications[index].status =
+                    newStatus;
+
+
+                localStorage.setItem(
+
+                    "scholarLinkApplications",
+
+                    JSON.stringify(
+                        applications
+                    )
+
+                );
+
+
+                alert(
+                    "Application status updated successfully."
+                );
+
+            }
+
+
+            else {
+
+                alert(
+                    "Application could not be found."
+                );
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

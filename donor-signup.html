@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Registration | ScholarLink</title>
+
+    <style>
+        :root {
+            --burgundy: #800020;
+            --dark-burgundy: #5A0018;
+            --background: #F8F4F5;
+            --muted: #62565A;
+            --border: #E7D7DD;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 28px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: #171114;
+            background:
+                linear-gradient(135deg, rgba(42,0,13,.88),
+                rgba(128,0,32,.76)),
+                url("Scholarlink-background.png") center / cover fixed,
+                var(--dark-burgundy);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 540px;
+            padding: 36px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 24px 70px rgba(25,0,8,.3);
+            border-top: 7px solid var(--burgundy);
+        }
+
+        .brand {
+            text-align: center;
+            color: var(--burgundy);
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0 0 25px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 14px;
+        }
+
+        .group { margin-bottom: 17px; }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #D8C9CE;
+            border-radius: 9px;
+            background: #FFFCFD;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--burgundy);
+            box-shadow: 0 0 0 3px rgba(128,0,32,.12);
+        }
+
+        .full { grid-column: 1 / -1; }
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            color: #8B0000;
+            background: #FFF0F0;
+            border: 1px solid #E5BABA;
+        }
+
+        .message.success {
+            display: block;
+            color: #145523;
+            background: #EDF8EF;
+            border: 1px solid #B8DDC0;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg,
+                var(--burgundy), var(--dark-burgundy));
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled { opacity: .65; cursor: wait; }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        a {
+            color: var(--burgundy);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover { text-decoration: underline; }
+
+        @media (max-width: 520px) {
+            .card { padding: 27px 21px; }
+            .grid { grid-template-columns: 1fr; }
+            .full { grid-column: auto; }
+        }
+    </style>
+</head>
+
+<body>
+<main class="card">
+    <div class="brand">♡ ScholarLink</div>
+
+    <h1>Become a Donor</h1>
+    <p class="subtitle">
+        Make a difference. Help students access education
+        and build a brighter future.
+    </p>
+
+    <div id="message" class="message"
+         role="alert" aria-live="polite"></div>
+
+    <form id="donorForm">
+        <div class="grid">
+            <div class="group">
+                <label for="firstName">First name *</label>
+                <input id="firstName" name="firstName"
+                       autocomplete="given-name" required>
+            </div>
+
+            <div class="group">
+                <label for="lastName">Surname *</label>
+                <input id="lastName" name="lastName"
+                       autocomplete="family-name" required>
+            </div>
+
+            <div class="group full">
+                <label for="email">Email address *</label>
+                <input id="email" name="email" type="email"
+                       autocomplete="email" required>
+            </div>
+
+            <div class="group full">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel"
+                       autocomplete="tel">
+            </div>
+
+            <div class="group full">
+                <label for="donorType">Donor type *</label>
+                <select id="donorType" name="donorType" required>
+                    <option value="Individual">Individual</option>
+                    <option value="Organisation">Organisation</option>
+                </select>
+            </div>
+
+            <div class="group full" id="organisationGroup"
+                 hidden>
+                <label for="organisationName">
+                    Organisation name *
+                </label>
+                <input id="organisationName"
+                       name="organisationName"
+                       autocomplete="organization">
+            </div>
+
+            <div class="group full">
+                <label for="password">Password *</label>
+                <input id="password" name="password"
+                       type="password" minlength="8"
+                       autocomplete="new-password" required>
+            </div>
+
+            <div class="group full">
+                <label for="confirmPassword">
+                    Confirm password *
+                </label>
+                <input id="confirmPassword"
+                       name="confirmPassword"
+                       type="password" minlength="8"
+                       autocomplete="new-password" required>
+            </div>
+        </div>
+
+        <button id="submitButton" type="submit">
+            Create Donor Account
+        </button>
+    </form>
+
+    <div class="footer">
+        Already have an account?
+        <a href="login.html">Sign in</a>
+        <br>
+        <a href="index.html">← Back to ScholarLink</a>
+    </div>
+</main>
+
+<script>
+    const form = document.getElementById("donorForm");
+    const donorType = document.getElementById("donorType");
+    const organisationGroup =
+        document.getElementById("organisationGroup");
+    const organisationName =
+        document.getElementById("organisationName");
+    const message = document.getElementById("message");
+    const submitButton = document.getElementById("submitButton");
+
+    function updateOrganisationField() {
+        const isOrganisation =
+            donorType.value === "Organisation";
+
+        organisationGroup.hidden = !isOrganisation;
+        organisationName.required = isOrganisation;
+
+        if (!isOrganisation) {
+            organisationName.value = "";
+        }
+    }
+
+    donorType.addEventListener("change", updateOrganisationField);
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        message.className = "message";
+
+        const password =
+            document.getElementById("password").value;
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        if (password.length < 8) {
+            showMessage(
+                "Your password must contain at least 8 characters.",
+                "error"
+            );
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage("Your passwords do not match.", "error");
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Creating account...";
+
+        try {
+            const response = await fetch(
+                "http://localhost:3000/api/auth/donor-signup",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        firstName:
+                            document.getElementById("firstName").value.trim(),
+                        lastName:
+                            document.getElementById("lastName").value.trim(),
+                        email:
+                            document.getElementById("email").value.trim(),
+                        phone:
+                            document.getElementById("phone").value.trim(),
+                        donorType: donorType.value,
+                        organisationName: organisationName.value.trim(),
+                        password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || "Could not create the donor account."
+                );
+            }
+
+            showMessage(
+                data.message || "Donor account created successfully. You can now sign in.",
+                "success"
+            );
+
+            form.reset();
+            updateOrganisationField();
+
+            // Do not automatically sign in until the donor
+            // login and role-based redirect have been connected.
+        } catch (error) {
+            showMessage(
+                error.message ||
+                "Unable to connect to the ScholarLink server.",
+                "error"
+            );
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Create Donor Account";
+        }
+    });
+
+    updateOrganisationField();
+</script>
+</body>
+</html>

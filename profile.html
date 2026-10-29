@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarLink - Student Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            background-image: url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            margin: 0;
+            padding: 40px 20px;
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+        }
+
+        .profile-container {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 40px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+            box-sizing: border-box;
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #1a2e44;
+
+            margin-bottom: 8px;
+        }
+
+        .title {
+            text-align: center;
+
+            font-size: 24px;
+
+            color: #333;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 30px;
+
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 5px;
+
+            box-sizing: border-box;
+
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+
+            border-color: #2ab7ca;
+
+            box-shadow: 0 0 5px rgba(42, 183, 202, 0.25);
+        }
+
+        .section-title {
+            color: #1a2e44;
+
+            border-bottom: 2px solid #2ab7ca;
+
+            padding-bottom: 8px;
+
+            margin-top: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+
+            padding: 13px;
+
+            background-color: #1a2e44;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2ab7ca;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <!-- ScholarLink Logo -->
+        <div class="logo">
+            🎓 ScholarLink
+        </div>
+
+
+        <!-- Page Title -->
+        <h1 class="title">
+            Student Profile
+        </h1>
+
+
+        <!-- Description -->
+        <p class="description">
+            Complete your profile so ScholarLink can help you
+            find scholarship opportunities that match your
+            academic information.
+        </p>
+
+
+        <!-- Profile Form -->
+        <form id="profileForm">
+
+
+            <!-- Student Information -->
+            <h2 class="section-title">
+                Student Information
+            </h2>
+
+
+            <!-- Student Number -->
+            <div class="form-group">
+
+                <label for="studentNumber">
+                    Student Number
+                </label>
+
+                <input
+                    type="text"
+                    id="studentNumber"
+                    name="studentNumber"
+                    placeholder="Enter your student number"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Study Level -->
+            <div class="form-group">
+
+                <label for="studyLevel">
+                    Study Level
+                </label>
+
+                <select
+                    id="studyLevel"
+                    name="studyLevel"
+                    required
+                >
+
+                    <option value="">
+                        Select your study level
+                    </option>
+
+                    <option value="undergraduate">
+                        Undergraduate
+                    </option>
+
+                    <option value="postgraduate">
+                        Postgraduate
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Qualification Type -->
+            <div class="form-group">
+
+                <label for="qualificationType">
+                    Qualification Type
+                </label>
+
+                <select
+                    id="qualificationType"
+                    name="qualificationType"
+                    required
+                >
+
+                    <option value="">
+                        Select your qualification type
+                    </option>
+
+                    <option value="certificate">
+                        Certificate
+                    </option>
+
+                    <option value="diploma">
+                        Diploma
+                    </option>
+
+                    <option value="advanced-diploma">
+                        Advanced Diploma
+                    </option>
+
+                    <option value="bachelors-degree">
+                        Bachelor's Degree
+                    </option>
+
+                    <option value="honours">
+                        Honours
+                    </option>
+
+                    <option value="masters">
+                        Master's
+                    </option>
+
+                    <option value="doctoral">
+                        Doctoral
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Save Profile Button -->
+            <button type="submit">
+                Save Profile
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        const profileForm =
+            document.getElementById("profileForm");
+
+
+        profileForm.addEventListener("submit", function(event) {
+
+            // Prevent the page from refreshing
+            event.preventDefault();
+
+
+            // Go to the Scholarship Hub
+            window.location.href = "scholarships.html";
+
+        });
+
+    </script>
+
+</body>
+
+</html>

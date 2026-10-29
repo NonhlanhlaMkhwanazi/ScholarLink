@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | ScholarLink</title>
+
+    <style>
+        :root {
+            --burgundy: #800020;
+            --dark-burgundy: #5A0018;
+            --light-background: #F8F4F5;
+            --white: #FFFFFF;
+            --black: #000000;
+            --muted: #62565A;
+            --border: #E7D7DD;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            isolation: isolate;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(42, 0, 13, 0.88),
+                    rgba(128, 0, 32, 0.76)
+                ),
+                url("Scholarlink-background.png") center / cover fixed no-repeat,
+                var(--dark-burgundy);
+            font-family: Arial, sans-serif;
+            color: var(--black);
+        }
+
+        .signup-card {
+            width: 100%;
+            max-width: 490px;
+            padding: 38px 40px 32px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 24px 70px rgba(25, 0, 8, 0.34);
+            position: relative;
+            overflow: hidden;
+            animation: appear 0.5s ease-out;
+        }
+
+        .signup-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 7px;
+            background: linear-gradient(
+                90deg,
+                var(--dark-burgundy),
+                var(--burgundy),
+                #B84B6B
+            );
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Burgundy bookshelf icon */
+        .brand-mark {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--burgundy);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(128, 0, 32, 0.24);
+        }
+
+        .brand-mark svg {
+            width: 49px;
+            height: 49px;
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .brand {
+            text-align: center;
+            color: var(--burgundy);
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .brand-tagline {
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 23px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin: 0 0 9px;
+            color: var(--black);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #51484B;
+            margin: 0 auto 25px;
+            line-height: 1.55;
+            max-width: 340px;
+            font-size: 14px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 14px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: var(--black);
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--burgundy);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 13px 13px 39px;
+            border: 1px solid #D8C9CE;
+            border-radius: 9px;
+            font-size: 14px;
+            color: var(--black);
+            background: #FFFCFD;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--burgundy);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.12);
+        }
+
+        input::placeholder {
+            color: #92858A;
+        }
+
+        .password-help {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .message {
+            display: none;
+            padding: 12px 13px;
+            border-radius: 9px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            font-size: 13px;
+        }
+
+        .message.error {
+            display: block;
+            background: #FFF0F0;
+            color: #8B0000;
+            border: 1px solid #E5BABA;
+        }
+
+        .message.success {
+            display: block;
+            background: #EDF8EF;
+            color: #145523;
+            border: 1px solid #B8DDC0;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(
+                135deg,
+                var(--burgundy),
+                var(--dark-burgundy)
+            );
+            color: var(--white);
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(128, 0, 32, 0.22);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .signup-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 11px 23px rgba(128, 0, 32, 0.28);
+        }
+
+        .signup-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #8B7C82;
+            font-size: 11px;
+            margin: 21px 0 17px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            background: var(--border);
+            flex: 1;
+        }
+
+        .footer {
+            text-align: center;
+            color: #40383B;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--burgundy);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 17px;
+            color: #5C4B51;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 18px 12px;
+                background-attachment: scroll;
+            }
+
+            .signup-card {
+                padding: 32px 22px 25px;
+                border-radius: 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .brand {
+                font-size: 27px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="signup-card">
+
+        <div class="brand-mark" aria-label="ScholarLink bookshelf logo">
+            <svg viewBox="0 0 48 48" role="img"
+                 aria-label="Bookshelf with books">
+                <!-- Bookshelf frame -->
+                <path d="M6 39H42"/>
+                <path d="M9 39V10"/>
+                <path d="M39 39V10"/>
+                <path d="M7 24H41"/>
+                <!-- Upper shelf books -->
+                <path d="M13 21V9H19V21"/>
+                <path d="M21 21V6H27V21"/>
+                <path d="M29 21V12H35V21"/>
+                <!-- Lower shelf books -->
+                <path d="M13 36V27H20V36"/>
+                <path d="M22 36V25H28V36"/>
+                <path d="M30 36V29H35V36"/>
+                <!-- Book details -->
+                <path d="M16 12V18"/>
+                <path d="M24 9V18"/>
+                <path d="M32 14V18"/>
+            </svg>
+        </div>
+
+        <div class="brand">ScholarLink</div>
+        <div class="brand-tagline">Your future starts here</div>
+
+        <h1>Create Your Account</h1>
+
+        <p class="subtitle">
+            Join your church scholarship community and take the next
+            step in your education journey.
+        </p>
+
+        <div id="message" class="message"
+             role="alert" aria-live="polite"></div>
+
+        <form id="signupForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">♙</span>
+                        <input type="text" id="firstName" name="firstName"
+                               placeholder="Enter first name"
+                               autocomplete="given-name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Surname *</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">♙</span>
+                        <input type="text" id="lastName" name="lastName"
+                               placeholder="Enter surname"
+                               autocomplete="family-name" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">✉</span>
+                    <input type="email" id="email" name="email"
+                           placeholder="you@example.com"
+                           autocomplete="email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">☎</span>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="Enter phone number"
+                           autocomplete="tel">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">◆</span>
+                    <input type="password" id="password" name="password"
+                           placeholder="Create a password"
+                           autocomplete="new-password"
+                           minlength="8" required>
+                </div>
+                <small class="password-help">
+                    Use at least 8 characters.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">◆</span>
+                    <input type="password" id="confirmPassword"
+                           name="confirmPassword"
+                           placeholder="Re-enter your password"
+                           autocomplete="new-password"
+                           minlength="8" required>
+                </div>
+            </div>
+
+            <button type="submit" class="signup-button" id="signupButton">
+                Create Account
+            </button>
+        </form>
+
+        <div class="divider">ALREADY REGISTERED?</div>
+
+        <div class="footer">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </main>
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+        const signupButton = document.getElementById("signupButton");
+        const messageBox = document.getElementById("message");
+
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.className = "message " + type;
+        }
+
+        signupForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const firstName =
+                document.getElementById("firstName").value.trim();
+
+            const lastName =
+                document.getElementById("lastName").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim().toLowerCase();
+
+            const phone =
+                document.getElementById("phone").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+            if (password.length < 8) {
+                showMessage(
+                    "Your password must contain at least 8 characters.",
+                    "error"
+                );
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage(
+                    "The passwords do not match. Please try again.",
+                    "error"
+                );
+                return;
+            }
+
+            signupButton.disabled = true;
+            signupButton.textContent = "Creating Account...";
+            messageBox.className = "message";
+
+            try {
+                const response = await fetch("http://localhost:3000/api/auth/signup",  {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        firstName: firstName,
+                        surname: lastName,
+                        email: email,
+                        phone: phone,
+                        password: password
+                    })
+                });
+
+                
+const responseText = await response.text();
+
+let result = {};
+
+try {
+    result = responseText ? JSON.parse(responseText) : {};
+} catch (parseError) {
+    throw new Error(
+        `The server returned an invalid response (HTTP ${response.status}). Check the server.js terminal for details.`
+    );
+}
+
+if (!response.ok || result.success !== true) {
+    throw new Error(
+        result.message ||
+        `Account creation failed (HTTP ${response.status}). Check server.js for the cause.`
+    );
+}
+
+
+                showMessage(
+                    "Your account has been created successfully! " +
+                    "Redirecting to sign in...",
+                    "success"
+                );
+
+                signupForm.reset();
+
+                setTimeout(function () {
+                    window.location.href = "login.html";
+                }, 1800);
+
+            } catch (error) {
+                console.error("Sign-up request failed:", error);
+
+                showMessage(
+                    error.message === "Failed to fetch"
+                        ? "Cannot connect to ScholarLink. Make sure the backend is running at localhost:3000."
+                        : error.message,
+                    "error"
+                );
+
+            } finally {
+                signupButton.disabled = false;
+                signupButton.textContent = "Create Account";
+            }
+        });
+    </script>
+</body>
+</html>

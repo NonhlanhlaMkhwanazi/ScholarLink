@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScholarLink | Applicant Dashboard</title>
+
+<style>
+:root {
+    --burgundy: #800020;
+    --dark-burgundy: #520018;
+    --background: #f4f6fb;
+    --text: #17263e;
+    --muted: #64748b;
+    --border: #e5eaf2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button, input, a {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* TOP BAR */
+
+.topbar {
+    min-height: 76px;
+    padding: 14px 28px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--burgundy);
+}
+
+.brand-icon {
+    font-size: 35px;
+}
+
+.brand h2 {
+    font-size: 26px;
+}
+
+.brand p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border: 1px solid var(--burgundy);
+    border-radius: 7px;
+    background: var(--burgundy);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: .2s;
+}
+
+.button:hover {
+    background: var(--dark-burgundy);
+    border-color: var(--dark-burgundy);
+}
+
+.button-outline {
+    background: white;
+    color: var(--burgundy);
+}
+
+.button-outline:hover {
+    background: #fbedf1;
+    color: var(--burgundy);
+}
+
+/* PAGE LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+    width: 265px;
+    flex-shrink: 0;
+    padding: 28px 15px;
+    background: linear-gradient(180deg, #57001c, #390014);
+    color: white;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 14px;
+    margin-bottom: 7px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.nav-link span {
+    width: 25px;
+    text-align: center;
+    font-size: 21px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255,255,255,.19);
+}
+
+main {
+    flex: 1;
+    min-width: 0;
+    padding: 28px;
+}
+
+/* WELCOME BANNER */
+
+.welcome {
+    min-height: 145px;
+    padding: 27px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 9px;
+    color: white;
+    background:
+        radial-gradient(circle at 90% 20%, #a42b50 0, transparent 35%),
+        linear-gradient(110deg, #760027, #4d001b);
+}
+
+.welcome-icon {
+    width: 82px;
+    height: 82px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.14);
+    font-size: 39px;
+}
+
+.welcome h1 {
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    max-width: 700px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #fff0f4;
+}
+
+/* SECTION HEADINGS */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* SUMMARY CARDS */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.card {
+    min-width: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(20,35,60,.035);
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 25px;
+    margin-bottom: 14px;
+}
+
+.pink { background: #fbe1e5; color: #850025; }
+.blue { background: #dceeff; color: #0874ce; }
+.green { background: #dff3e3; color: #187b43; }
+.purple { background: #eee4fc; color: #6634a2; }
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+}
+
+.stat-note {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* CONTENT PANELS */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 23px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(20,35,60,.035);
+    min-width: 0;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.panel-title span {
+    color: var(--burgundy);
+    font-size: 24px;
+}
+
+.panel-description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 19px 0;
+    border-top: 1px solid var(--border);
+}
+
+.action-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 23px;
+}
+
+.action-description {
+    flex: 1;
+    min-width: 0;
+}
+
+.action-description h4 {
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.action-description p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.action-row .button {
+    padding: 10px 12px;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+/* APPLICATION DETAILS */
+
+.application-card {
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.application-header {
+    padding: 19px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: #fbf4f6;
+    border-bottom: 1px solid var(--border);
+}
+
+.application-header h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+.application-header p {
+    font-size: 12px;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+.status {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: #fbe7ed;
+    color: var(--burgundy);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.application-body {
+    padding: 22px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.detail {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf0f5;
+    min-width: 0;
+}
+
+.detail-label {
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+    background: #f5f7fb;
+    border-radius: 8px;
+    padding: 30px 18px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 59px;
+    height: 59px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #fbe1e5;
+    color: var(--burgundy);
+    font-size: 27px;
+}
+
+.empty-state h3 {
+    font-size: 16px;
+    margin-bottom: 9px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.empty-state .button {
+    margin-top: 18px;
+}
+
+/* PROFILE FORM */
+
+.profile-panel[hidden] {
+    display: none;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.form-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d7dce5;
+    border-radius: 7px;
+    outline: none;
+    background: white;
+    color: var(--text);
+}
+
+.form-field input:focus {
+    border-color: var(--burgundy);
+    box-shadow: 0 0 0 3px #80002015;
+}
+
+.help-text {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+.message {
+    padding: 12px 14px;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.message:empty {
+    display: none;
+}
+
+.message.error {
+    background: #fff0f0;
+    color: #9b1c1c;
+    border: 1px solid #f0c6c6;
+}
+
+.message.success {
+    background: #edf8f0;
+    color: #216b36;
+    border: 1px solid #bfe4c8;
+}
+
+.message.info {
+    background: #f1f4fb;
+    color: #294b85;
+    border: 1px solid #d5def4;
+}
+
+.impact {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px;
+    background: #fbf2f5;
+    border-radius: 8px;
+}
+
+.impact h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.impact p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 22px 0 5px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 220px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    main {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        position: static;
+        padding: 14px;
+        flex-wrap: wrap;
+    }
+
+    .brand h2 {
+        font-size: 22px;
+    }
+
+    .top-actions {
+        flex-wrap: wrap;
+    }
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+    }
+
+    .nav-link {
+        flex-shrink: 0;
+        margin: 0;
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .nav-link span {
+        width: auto;
+    }
+
+    main {
+        padding: 14px;
+    }
+
+    .welcome {
+        padding: 19px;
+        align-items: flex-start;
+        gap: 13px;
+    }
+
+    .welcome-icon {
+        width: 53px;
+        height: 53px;
+        font-size: 27px;
+    }
+
+    .welcome h1 {
+        font-size: 21px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+
+    .summary-grid {
+        gap: 10px;
+    }
+
+    .card, .panel {
+        padding: 16px;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    .action-row {
+        flex-wrap: wrap;
+    }
+
+    .action-description {
+        min-width: 120px;
+    }
+
+    .details-grid, .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field.full-width {
+        grid-column: auto;
+    }
+
+    .application-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .button-row .button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 390px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+            <h2>ScholarLink</h2>
+            <p>Connect · Support · Empower</p>
+        </div>
+    </div>
+
+    <div class="top-actions">
+        <span class="user-name" id="headerName">Welcome, Applicant</span>
+        <button class="button" id="logoutButton" type="button">
+            ↪ Sign Out
+        </button>
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <a class="nav-link active" href="#dashboard">
+            <span>⌂</span> Dashboard
+        </a>
+        <a class="nav-link" href="scholarships.html">
+            <span>🎓</span> Scholarships
+        </a>
+        <a class="nav-link" href="#myApplication">
+            <span>▤</span> My Applications
+        </a>
+        <a class="nav-link" href="#profilePanel" id="profileNavLink">
+            <span>♙</span> My Profile
+        </a>
+        <a class="nav-link" href="#help">
+            <span>♡</span> Help & Support
+        </a>
+    </aside>
+
+    <main id="dashboard">
+
+        <section class="welcome">
+            <div class="welcome-icon">🎓</div>
+            <div>
+                <h1 id="welcomeMessage">Welcome back!</h1>
+                <p>
+                    Keep moving towards your educational goals.
+                    Explore scholarships, manage your applications,
+                    and stay updated on your application progress.
+                </p>
+            </div>
+        </section>
+
+        <section class="summary-grid">
+            <article class="card">
+                <div class="stat-icon pink">▤</div>
+                <p class="stat-label">My Applications</p>
+                <p class="stat-value" id="applicationCount">0</p>
+                <p class="stat-note">Applications on this dashboard</p>
+            </article>
+
+            <article class="card">
+                <div class="stat-icon blue">🎓</div>
+                <p class="stat-label">Scholarship Applied For</p>
+                <p class="stat-value" id="scholarshipName">None yet</p>
+                <p class="stat-note">Based on your saved applications</p>
+            </article>
+
+            <article class="card">
+                <div class="stat-icon green">✓</div>
+                <p class="stat-label">Latest Application Status</p>
+                <p class="stat-value" id="applicationStatus">Not Applied</p>
+                <p class="stat-note">Check your application details below</p>
+            </article>
+        </section>
+
+        <section class="content-grid">
+
+            <div>
+                <article class="panel" id="myApplication">
+                    <h2 class="panel-title">
+                        <span>▤</span> My Scholarship Applications
+                    </h2>
+                    <p class="panel-description">
+                        View the applications associated with your account
+                        and check their current statuses.
+                    </p>
+
+                    <div id="applicationArea" aria-live="polite">
+                        <div class="empty-state">
+                            <p>Loading your applications...</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel" id="help">
+                    <h2 class="panel-title">
+                        <span>♡</span> Need Help?
+                    </h2>
+                    <p class="panel-description">
+                        If you have questions about your scholarship
+                        application, contact the appropriate church
+                        scholarship administrator. Keep your application
+                        details and supporting documents available.
+                    </p>
+                </article>
+            </div>
+
+            <div>
+                <article class="panel" id="scholarshipPanel">
+                    <h2 class="panel-title">
+                        <span>🎓</span> Find Scholarships
+                    </h2>
+                    <p class="panel-description">
+                        Discover scholarship opportunities that may help
+                        you continue your studies and achieve your goals.
+                    </p>
+
+                    <div class="action-row">
+                        <div class="action-icon blue">🎓</div>
+                        <div class="action-description">
+                            <h4>Browse Scholarships</h4>
+                            <p>Explore the opportunities available to you.</p>
+                        </div>
+                        <a href="scholarships.html" class="button">
+                            Explore →
+                        </a>
+                    </div>
+
+                    <div class="action-row">
+                        <div class="action-icon pink">▤</div>
+                        <div class="action-description">
+                            <h4>Track Applications</h4>
+                            <p>Review your saved application information.</p>
+                        </div>
+                        <a href="#myApplication" class="button">
+                            View →
+                        </a>
+                    </div>
+
+                    <div class="action-row">
+                        <div class="action-icon green">♙</div>
+                        <div class="action-description">
+                            <h4>Update Your Profile</h4>
+                            <p>Review your personal contact details.</p>
+                        </div>
+                        <button type="button" class="button"
+                                id="editProfileButton">
+                            Edit →
+                        </button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <h2 class="panel-title">
+                        <span>◷</span> Application Activity
+                    </h2>
+                    <div class="empty-state">
+                        <div class="empty-icon">▤</div>
+                        <h3 id="activityTitle">Your application journey</h3>
+                        <p id="activityMessage">
+                            Your saved application information will appear
+                            in the applications section.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <h2 class="panel-title">
+                        <span>♡</span> Your Future Matters
+                    </h2>
+                    <div class="impact">
+                        <div class="action-icon pink">🎓</div>
+                        <div>
+                            <h4>Keep working towards your goals.</h4>
+                            <p>
+                                Scholarship opportunities can help you
+                                take the next step in your education.
+                                Check available opportunities regularly.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </section>
+
+        <!-- PROFILE FORM -->
+        <section id="profilePanel" class="panel profile-panel" hidden>
+            <div class="section-heading">
+                <div>
+                    <h2>My Profile</h2>
+                    <p>Update your personal contact information.</p>
+                </div>
+                <button type="button" class="button button-outline"
+                        id="closeProfileButton">Close</button>
+            </div>
+
+            <div id="profileMessage" class="message" role="status"
+                 aria-live="polite"></div>
+
+            <form id="profileForm">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="firstName">First name *</label>
+                        <input id="firstName" name="firstName" type="text"
+                               maxlength="100" autocomplete="given-name" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="surname">Surname *</label>
+                        <input id="surname" name="surname" type="text"
+                               maxlength="100" autocomplete="family-name" required>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="email">Email address *</label>
+                        <input id="email" name="email" type="email"
+                               maxlength="254" autocomplete="email" required>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="phoneNumber">Phone number</label>
+                        <input id="phoneNumber" name="phoneNumber" type="tel"
+                               maxlength="30" autocomplete="tel">
+                    </div>
+                </div>
+
+                <p class="help-text">
+                    Your changes will only be shown as saved after the
+                    server confirms that the database was updated.
+                </p>
+
+                <div class="button-row">
+                    <button type="submit" class="button" id="saveProfileButton">
+                        Save Changes
+                    </button>
+                    <button type="button" class="button button-outline"
+                            id="cancelProfileButton">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            © 2026 ScholarLink Church Scholarship Hub. All rights reserved.
+        </footer>
+
+    </main>
+</div>
+
+<script>
+"use strict";
+
+const API_BASE = "http://localhost:3000/api";
+
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+
+try {
+    const savedUser = sessionStorage.getItem("scholarLinkCurrentUser");
+    currentUser = savedUser ? JSON.parse(savedUser) : null;
+} catch (error) {
+    console.error("Could not read the current user.", error);
+}
+
+if (!currentUser || !currentUser.email) {
+    sessionStorage.removeItem("scholarLinkCurrentUser");
+    window.location.replace("login.html");
+}
+
+const profilePanel = $("profilePanel");
+const profileForm = $("profileForm");
+const profileMessage = $("profileMessage");
+
+function showMessage(element, message, type = "info") {
+    element.textContent = message;
+    element.className = "message " + type;
+}
+
+function clearMessage(element) {
+    element.textContent = "";
+    element.className = "message";
+}
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function displayName(user) {
+    const first = user.firstName || user.first_name || "";
+    const surname = user.surname || user.lastName ||
+        user.last_name || "";
+
+    return [first, surname].filter(Boolean).join(" ").trim() || "Applicant";
+}
+
+function updateWelcome() {
+    const name = displayName(currentUser);
+
+    $("welcomeMessage").textContent = "Welcome back, " + name + "!";
+    $("headerName").textContent = "Welcome, " + name;
+}
+
+async function apiRequest(path, options = {}) {
+    const response = await fetch(API_BASE + path, {
+        ...options,
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            ...(options.headers || {})
+        }
+    });
+
+    const text = await response.text();
+    let data = {};
+
+    try {
+        data = text ? JSON.parse(text) : {};
+    } catch {
+        data = { message: text };
+    }
+
+    if (!response.ok) {
+        throw new Error(data.message || data.error ||
+            "The server returned HTTP " + response.status);
+    }
+
+    return data;
+}
+
+/* PROFILE */
+
+function openProfile() {
+    profilePanel.hidden = false;
+    clearMessage(profileMessage);
+    profilePanel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+    loadProfile();
+}
+
+function closeProfile() {
+    profilePanel.hidden = true;
+    clearMessage(profileMessage);
+}
+
+async function loadProfile() {
+    showMessage(profileMessage, "Loading your saved profile...", "info");
+
+    try {
+        const data = await apiRequest("/profile/me");
+        const profile = data.profile || data;
+
+        $("firstName").value =
+            profile.firstName || profile.FIRST_NAME || "";
+        $("surname").value =
+            profile.surname || profile.lastName ||
+            profile.LAST_NAME || "";
+        $("email").value = profile.email || profile.EMAIL || "";
+        $("phoneNumber").value =
+            profile.phoneNumber || profile.phone ||
+            profile.PHONE_NUMBER || "";
+
+        clearMessage(profileMessage);
+    } catch (error) {
+        console.error("Profile load failed:", error);
+
+        $("firstName").value =
+            currentUser.firstName || currentUser.first_name || "";
+        $("surname").value =
+            currentUser.surname || currentUser.lastName ||
+            currentUser.last_name || "";
+        $("email").value = currentUser.email || "";
+        $("phoneNumber").value =
+            currentUser.phoneNumber || currentUser.phone || "";
+
+        showMessage(
+            profileMessage,
+            "Could not load your saved profile from the server. " +
+            error.message +
+            ". The form shows the information available at login; " +
+            "saving requires a working backend profile route.",
+            "error"
+        );
+    }
+}
+
+profileForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    clearMessage(profileMessage);
+
+    const firstName = $("firstName").value.trim();
+    const surname = $("surname").value.trim();
+    const email = $("email").value.trim();
+    const phoneNumber = $("phoneNumber").value.trim();
+
+    if (!firstName || !surname || !email) {
+        showMessage(profileMessage,
+            "First name, surname and email are required.", "error");
+        return;
+    }
+
+    const saveButton = $("saveProfileButton");
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    try {
+        const data = await apiRequest("/profile/me", {
+            method: "PUT",
+            body: JSON.stringify({
+                firstName,
+                surname,
+                email,
+                phoneNumber
+            })
+        });
+
+        const saved = data.profile || {
+            firstName, surname, email, phoneNumber
+        };
+
+        currentUser.firstName = saved.firstName || firstName;
+        currentUser.surname = saved.surname || surname;
+        currentUser.email = saved.email || email;
+        currentUser.phoneNumber = saved.phoneNumber || phoneNumber;
+
+        sessionStorage.setItem(
+            "scholarLinkCurrentUser",
+            JSON.stringify(currentUser)
+        );
+
+        updateWelcome();
+
+        showMessage(profileMessage,
+            data.message || "Your profile was updated successfully.",
+            "success");
+    } catch (error) {
+        console.error("Profile save failed:", error);
+        showMessage(profileMessage,
+            "Your changes were not confirmed as saved. " + error.message,
+            "error");
+    } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = "Save Changes";
+    }
+});
+
+$("editProfileButton").addEventListener("click", openProfile);
+$("profileNavLink").addEventListener("click", function(event) {
+    event.preventDefault();
+    openProfile();
+});
+$("closeProfileButton").addEventListener("click", closeProfile);
+$("cancelProfileButton").addEventListener("click", closeProfile);
+
+/* SIGN OUT */
+
+$("logoutButton").addEventListener("click", function() {
+    sessionStorage.removeItem("scholarLinkLoggedIn");
+    sessionStorage.removeItem("scholarLinkCurrentUser");
+    window.location.href = "login.html";
+});
+
+/* APPLICATIONS
+   This keeps the existing localStorage application source.
+   It does not invent database records.
+*/
+
+
+async function loadApplications() {
+    const area = $("applicationArea");
+
+    area.innerHTML = `
+        <div class="empty-state">
+            <p>Loading your applications from the database...</p>
+        </div>
+    `;
+
+    try {
+        const data = await apiRequest("/applications/mine");
+        const applications = data.applications || [];
+
+        $("applicationCount").textContent = applications.length;
+
+        const latest = applications[0];
+
+        $("scholarshipName").textContent = latest
+            ? (latest.SCHOLARSHIP_NAME || "Scholarship")
+            : "None yet";
+
+        $("applicationStatus").textContent = latest
+            ? (latest.STATUS_NAME || "Pending")
+            : "Not Applied";
+
+        $("activityTitle").textContent = latest
+            ? "Your latest application"
+            : "Your application journey";
+
+        $("activityMessage").textContent = latest
+            ? "Latest status: " + (latest.STATUS_NAME || "Pending") +
+              ". Your applications are loaded from the database."
+            : "No applications have been found for your account.";
+
+        area.replaceChildren();
+
+        if (applications.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "empty-state";
+            empty.innerHTML = `
+                <div class="empty-icon">🎓</div>
+                <h3>No applications found</h3>
+                <p>
+                    There are no applications linked to your account yet.
+                    You can browse available scholarship opportunities.
+                </p>
+                <a href="scholarships.html" class="button">
+                    Browse Scholarships →
+                </a>
+            `;
+            area.appendChild(empty);
+            return;
+        }
+
+        applications.forEach(application => {
+            const card = document.createElement("article");
+            card.className = "panel application-card";
+
+            const applicationId = application.APPLICATION_ID;
+            const submittedDate = application.SUBMISSION_DATE
+                ? new Date(application.SUBMISSION_DATE).toLocaleDateString()
+                : "N/A";
+
+            const details = [
+                ["First Name", application.FIRST_NAME],
+                ["Surname", application.LAST_NAME],
+                ["Email", application.EMAIL],
+                ["Student Number", application.CURRENT_STUDENT_NUMBER],
+                ["Institution", application.CURRENT_INSTITUTION_NAME],
+                ["Programme", application.CURRENT_QUALIFICATION_NAME],
+                ["Field of Study", application.CURRENT_FIELD_OF_STUDY],
+                ["Study Level", application.CURRENT_DEGREE_TYPE],
+                ["Year of Study", application.CURRENT_TERTIARY_YEARS_COUNT],
+                ["Application Date", submittedDate],
+                ["Church", application.CHURCH_NAME]
+            ];
+
+            card.innerHTML = `
+                <div class="application-header">
+                    <div>
+                        <h3>Scholarship Application</h3>
+                        <p>Application ID: ${escapeHTML(applicationId)}</p>
+                    </div>
+                    <span class="status">
+                        ${escapeHTML(application.STATUS_NAME || "Pending")}
+                    </span>
+                </div>
+
+                <div class="application-body">
+                    <div class="details-grid">
+                        ${details.map(([label, value]) => `
+                            <div class="detail">
+                                <div class="detail-label">
+                                    ${escapeHTML(label)}
+                                </div>
+                                <div class="detail-value">
+                                    ${escapeHTML(value ?? "N/A")}
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>
+
+                    <div class="button-row">
+                        <a class="button"
+                           href="application-details.html?id=${encodeURIComponent(applicationId)}">
+                            View Full Application
+                        </a>
+                        <a class="button button-outline"
+                           href="scholarships.html">
+                            Browse Scholarships
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            area.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Could not load applications:", error);
+
+        area.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">!</div>
+                <h3>Unable to load applications</h3>
+                <p>${escapeHTML(error.message)}</p>
+                <p>Please sign in again and try refreshing the page.</p>
+            </div>
+        `;
+
+        $("applicationCount").textContent = "—";
+        $("scholarshipName").textContent = "Unavailable";
+        $("applicationStatus").textContent = "Unavailable";
+    }
+}
+
+updateWelcome();
+loadApplications();
+</script>
+
+</body>
+</html>

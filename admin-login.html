@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarLink - Admin Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #000000;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        /* Background overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: rgba(255, 255, 255, 0.55);
+
+            z-index: -1;
+        }
+
+        /* Main login container */
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 20px;
+        }
+
+        /* Login card */
+        .login-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            padding: 40px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+            border-top: 8px solid #800020;
+        }
+
+        /* Logo / heading area */
+        .logo-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-circle {
+            width: 75px;
+            height: 75px;
+
+            background: #800020;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo-area h1 {
+            color: #800020;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .logo-area p {
+            color: #000000;
+            font-size: 15px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 15px;
+
+            border: 2px solid #cccccc;
+            border-radius: 8px;
+
+            font-size: 16px;
+            color: #000000;
+
+            outline: none;
+
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #800020;
+        }
+
+        /* Login button */
+        .login-button {
+            width: 100%;
+
+            padding: 14px;
+
+            background: #800020;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .login-button:hover {
+            background: #5f0018;
+            transform: translateY(-1px);
+        }
+
+        /* Error message */
+        .error-message {
+            display: none;
+
+            background: #f8d7da;
+            color: #721c24;
+
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+
+            padding: 12px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+
+            background: #d4edda;
+            color: #155724;
+
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+
+            padding: 12px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Back button */
+        .back-section {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-section a {
+            color: #800020;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Small notice */
+        .security-note {
+            margin-top: 25px;
+
+            padding: 12px;
+
+            background: #f5f5f5;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 12px;
+            color: #333333;
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 30px 25px;
+            }
+
+            .logo-area h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <!-- Logo / Heading -->
+            <div class="logo-area">
+
+                <div class="logo-circle">
+                    SL
+                </div>
+
+                <h1>ScholarLink</h1>
+
+                <p>Administrator Login</p>
+
+            </div>
+
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message">
+                Incorrect username or password.
+            </div>
+
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                Login successful. Redirecting...
+            </div>
+
+
+            <!-- Login Form -->
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter admin username"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter admin password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login to Admin Dashboard
+                </button>
+
+            </form>
+
+
+            <!-- Back to Scholarships -->
+            <div class="back-section">
+
+                <a href="scholarships.html">
+                    ← Back to Scholarships
+                </a>
+
+            </div>
+
+
+            <!-- Security Note -->
+            <div class="security-note">
+
+                <strong>Admin Area</strong><br>
+
+                This page is restricted to authorised
+                ScholarLink administrators.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        
+const loginForm = document.getElementById("loginForm");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorMessage = document.getElementById("errorMessage");
+const successMessage = document.getElementById("successMessage");
+
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    errorMessage.style.display = "none";
+    successMessage.style.display = "none";
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+
+    try {
+        const response = await fetch("/api/auth/admin-login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            errorMessage.textContent =
+                data.message || "Invalid administrator username or password.";
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        successMessage.textContent = "Login successful. Redirecting...";
+        successMessage.style.display = "block";
+
+        sessionStorage.setItem("scholarLinkAdminLoggedIn", "true");
+
+        setTimeout(function () {
+            window.location.href = "admin.html";
+        }, 700);
+
+    } catch (error) {
+        errorMessage.textContent =
+            "Cannot connect to the server. Please try again.";
+        errorMessage.style.display = "block";
+    }
+});
+
+
+    </script>
+
+</body>
+</html>}

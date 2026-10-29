@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Application Status - ScholarLink</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background-image: url("background.png");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            color: #000000;
+        }
+
+
+        /* NAVBAR */
+
+        nav {
+
+            background-color: #800020;
+
+            padding: 18px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        nav h2 {
+
+            color: white;
+
+            margin: 0;
+        }
+
+
+        nav a {
+
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 20px;
+
+            font-weight: bold;
+        }
+
+
+        nav a:hover {
+
+            text-decoration: underline;
+        }
+
+
+
+        /*MAIN CONTAINER */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 800px;
+
+            margin: 50px auto;
+
+            background-color:
+                rgba(255, 255, 255, 0.96);
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.2);
+        }
+
+
+        h1 {
+
+            color: #800020;
+
+            text-align: center;
+
+            margin-top: 0;
+
+            margin-bottom: 10px;
+        }
+
+
+        .intro {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            color: #333;
+
+            line-height: 1.6;
+        }
+
+
+
+        /*SEARCH FORM */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #800020;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 2px solid #800020;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            color: #000000;
+        }
+
+
+        .form-group input:focus {
+
+            outline: none;
+
+            border-color: #5c0017;
+
+            box-shadow:
+                0 0 5px
+                rgba(128, 0, 32, 0.3);
+        }
+
+
+        .search-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+
+        .search-button:hover {
+
+            background-color: #5c0017;
+        }
+
+
+
+        /* ERROR MESSAGE */
+
+        .error-message {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background-color: #ffe6e6;
+
+            border-left: 5px solid #800020;
+
+            border-radius: 5px;
+
+            color: #800020;
+
+            font-weight: bold;
+        }
+
+
+
+        /*STATUS RESULT*/
+
+        .status-result {
+
+            display: none;
+
+            margin-top: 30px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            border: 2px solid #800020;
+        }
+
+
+        .result-header {
+
+            background-color: #800020;
+
+            color: white;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+
+        .result-header h2 {
+
+            margin: 0;
+
+            font-size: 22px;
+        }
+
+
+        .result-body {
+
+            padding: 25px;
+
+            background-color: #ffffff;
+        }
+
+
+        .result-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        .result-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .result-label {
+
+            font-weight: bold;
+
+            color: #800020;
+        }
+
+
+        .result-value {
+
+            text-align: right;
+
+            word-break: break-word;
+        }
+
+
+
+        /* STATUS BADGE */
+
+        .status-badge {
+
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            background-color: #800020;
+
+            color: white;
+        }
+
+
+
+        /*STATUS MESSAGE */
+
+        .status-message {
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background-color: #f5f5f5;
+
+            border-left: 5px solid #800020;
+
+            border-radius: 6px;
+
+            line-height: 1.6;
+        }
+
+
+
+        /* SEARCH AGAIN*/
+
+        .search-again {
+
+            display: none;
+
+            margin-top: 20px;
+
+            text-align: center;
+        }
+
+
+        .search-again button {
+
+            padding: 10px 20px;
+
+            background-color: #800020;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+
+        .search-again button:hover {
+
+            background-color: #5c0017;
+        }
+
+
+
+        /*BACK BUTTON */
+
+        .back-button {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            background-color: #800020;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+
+
+        .back-button:hover {
+
+            background-color: #5c0017;
+        }
+
+
+        @media (max-width: 700px) {
+
+            nav {
+
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+
+            nav a {
+
+                margin-left: 10px;
+            }
+
+
+            .container {
+
+                width: 95%;
+
+                padding: 25px 20px;
+            }
+
+
+            .result-row {
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+
+            .result-value {
+
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+   
+    <nav>
+
+        <h2>
+            ScholarLink
+        </h2>
+
+
+        <div>
+
+            <a href="scholarships.html">
+                Scholarships
+            </a>
+
+
+            <a href="application-status.html">
+                Check Status
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+
+        <h1>
+            Check Application Status
+        </h1>
+
+
+        <p class="intro">
+
+            Enter your Application ID and the email
+            address used when you submitted your
+            application to check your application status.
+
+        </p>
+
+
+
+        <!--SEARCH FORM-->
+
+        <div id="searchSection">
+
+
+            <div class="form-group">
+
+                <label for="applicationId">
+
+                    Application ID
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="applicationId"
+                    placeholder="Enter your Application ID"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="email">
+
+                    Email Address
+
+                </label>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter the email used in your application"
+                >
+
+            </div>
+
+
+
+            <button
+                class="search-button"
+                onclick="checkApplicationStatus()"
+            >
+
+                Check Application Status
+
+            </button>
+
+
+
+            <!-- ERROR -->
+
+            <div
+                class="error-message"
+                id="errorMessage"
+            ></div>
+
+        </div>
+
+
+
+        <!--  STATUS RESULT -->
+
+        <div
+            class="status-result"
+            id="statusResult"
+        >
+
+
+            <div class="result-header">
+
+                <h2>
+                    Application Status
+                </h2>
+
+            </div>
+
+
+
+            <div class="result-body">
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Application ID
+                    </span>
+
+                    <span
+                        class="result-value"
+                        id="resultApplicationId"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Applicant
+                    </span>
+
+                    <span
+                        class="result-value"
+                        id="resultApplicant"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Church
+                    </span>
+
+                    <span
+                        class="result-value"
+                        id="resultChurch"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Scholarship
+                    </span>
+
+                    <span
+                        class="result-value"
+                        id="resultScholarship"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Date Submitted
+                    </span>
+
+                    <span
+                        class="result-value"
+                        id="resultDate"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Current Status
+                    </span>
+
+                    <span
+                        class="result-value"
+                    >
+
+                        <span
+                            class="status-badge"
+                            id="resultStatus"
+                        ></span>
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- STATUS MESSAGE -->
+
+                <div
+                    class="status-message"
+                    id="statusMessage"
+                ></div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SEARCH AGAIN -->
+
+        <div
+            class="search-again"
+            id="searchAgain"
+        >
+
+            <button onclick="searchAgain()">
+
+                Check Another Application
+
+            </button>
+
+        </div>
+
+
+
+        <!-- BACK BUTTON -->
+
+        <div style="text-align: center;">
+
+            <a
+                href="scholarships.html"
+                class="back-button"
+            >
+
+                ← Back to Scholarships
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+        /*CHECK APPLICATION STATUS */
+
+       async function checkApplicationStatus() {
+
+
+            const applicationId =
+                document.getElementById(
+                    "applicationId"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim().toLowerCase();
+
+
+            const errorMessage =
+                document.getElementById(
+                    "errorMessage"
+                );
+
+
+            const statusResult =
+                document.getElementById(
+                    "statusResult"
+                );
+
+
+
+            /*CLEAR OLD ERROR */
+
+            errorMessage.style.display =
+                "none";
+
+            errorMessage.textContent = "";
+
+
+
+            /*VALIDATE INPUT*/
+
+            if (!applicationId) {
+
+                errorMessage.textContent =
+                    "Please enter your Application ID.";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            if (!email) {
+
+                errorMessage.textContent =
+                    "Please enter your email address.";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+
+
+           /* GET APPLICATION FROM SQL SERVER */
+
+let application;
+
+try {
+    const response = await fetch(
+        `http://localhost:3000/api/applications/${encodeURIComponent(applicationId)}`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+        errorMessage.textContent =
+            data.message || "Application not found. Please check your Application ID.";
+
+        errorMessage.style.display = "block";
+        return;
+    }
+
+    application = data.application;
+
+} catch (error) {
+    errorMessage.textContent =
+        "Could not connect to the server. Please make sure ScholarLink is running and try again.";
+
+    errorMessage.style.display = "block";
+    return;
+}
+
+            /*APPLICATION NOT FOUND*/
+
+            if (!application) {
+
+                errorMessage.textContent =
+                    "No application was found with this Application ID.";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+
+
+            /* CHECK EMAIL */
+
+            const storedEmail =
+                String(
+                    application.EMAIL || ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if (storedEmail !== email.trim().toLowerCase()) {
+
+                errorMessage.textContent =
+                    "The Application ID and email address do not match.";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+
+
+            
+            document.getElementById(
+                "resultApplicationId"
+            ).textContent =
+                application.APPLICATION_ID;
+
+
+            document.getElementById(
+                "resultApplicant"
+            ).textContent =
+                (
+                    application.FIRST_NAME || ""
+                ) +
+                " " +
+                (
+                    application.LAST_NAME || ""
+                );
+
+
+            document.getElementById(
+                "resultChurch"
+            ).textContent =
+                application.CHURCH_NAME|| "";
+
+
+            document.getElementById(
+                "resultScholarship"
+            ).textContent =
+                application.SCHOLARSHIP_NAME || "";
+
+
+            document.getElementById(
+                "resultDate"
+            ).textContent =
+                application.SUBMISSION_DATE ||
+                 application.SUBMITTED_AT ||
+                application.APPLICATION_DATE ||"";
+
+
+            const status =
+                application.STATUS_NAME||
+                "Pending";
+
+
+            document.getElementById(
+                "resultStatus"
+            ).textContent =
+                status;
+
+
+
+            /*  STATUS MESSAGE*/
+
+            const statusMessage =
+                document.getElementById(
+                    "statusMessage"
+                );
+
+
+            if (status === "Pending") {
+
+                statusMessage.innerHTML =
+                    `
+                    <strong>
+                        Application received
+                    </strong>
+                    <br><br>
+                    Your application has been successfully
+                    received and is currently waiting for
+                    review by the scholarship administrators.
+                    `;
+
+            }
+
+
+            else if (
+                status === "Under Review"
+            ) {
+
+                statusMessage.innerHTML =
+                    `
+                    <strong>
+                        Application under review
+                    </strong>
+                    <br><br>
+                    Your application is currently being
+                    reviewed. Please check again later for
+                    an updated decision.
+                    `;
+
+            }
+
+
+            else if (
+                status === "Approved"
+            ) {
+
+                statusMessage.innerHTML =
+                    `
+                    <strong>
+                        Application approved
+                    </strong>
+                    <br><br>
+                    Congratulations! Your application has
+                    been approved. Please wait for further
+                    communication from the scholarship
+                    administrators regarding the next steps.
+                    `;
+
+            }
+
+
+            else if (
+                status === "Rejected"
+            ) {
+
+                statusMessage.innerHTML =
+                    `
+                    <strong>
+                        Application not approved
+                    </strong>
+                    <br><br>
+                    Your application has not been approved.
+                    Please contact the relevant church
+                    scholarship administrators if you require
+                    further information.
+                    `;
+
+            }
+
+
+            else {
+
+                statusMessage.innerHTML =
+                    `
+                    <strong>
+                        Application status
+                    </strong>
+                    <br><br>
+                    Your current application status is:
+                    ${status}
+                    `;
+
+            }
+
+
+
+            /*HOW RESULT */
+
+            statusResult.style.display =
+                "block";
+
+
+            document.getElementById(
+                "searchAgain"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "searchSection"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        function searchAgain() {
+
+
+            document.getElementById(
+                "applicationId"
+            ).value = "";
+
+
+            document.getElementById(
+                "email"
+            ).value = "";
+
+
+            document.getElementById(
+                "statusResult"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "searchAgain"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "searchSection"
+            ).style.display =
+                "block";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
